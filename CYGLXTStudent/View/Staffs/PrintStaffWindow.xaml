@@ -1,0 +1,196 @@
+﻿<Window x:Class="CYGLXTStudent.Views.Staffs.PrintStaffWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Name="wdStaffAddOrEditWindow"
+        Icon="/Resources/Images/加菜.png"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="打印员工信息"
+        WindowStyle="None" Width="450" Height="600">
+    <!--页面资源-->
+    <Window.Resources>
+        <!---（1）蓝色-->
+        <!--径向渐变资源:蓝色3个颜色-->
+        <LinearGradientBrush x:Key="LGB_BlueT" StartPoint="0,0" EndPoint="0,1">
+            <!--使用LinearGradientBrush渐变画刷：定义一个渐变画刷，然后需要定义渐变颜色，颜色已对角线形式渐变-->
+            <!--GradientStop:定义渐变颜色与颜色渐变始点-->
+            <GradientStop Color="#f2f2f2" Offset="0"/>
+            <GradientStop Color="SkyBlue" Offset="0.5"/>
+            <GradientStop Color="SkyBlue" Offset="1"/>
+        </LinearGradientBrush>
+        <!--径向渐变资源:蓝色4个颜色-->
+        <LinearGradientBrush  x:Key="LGB_BlueF" StartPoint="0,0" EndPoint="1,1">
+            <!--使用LinearGradientBrush渐变画刷：定义一个渐变画刷，然后需要定义渐变颜色，颜色已对角线形式渐变-->
+            <!--GradientStop:定义渐变颜色与颜色渐变始点-->
+            <GradientStop Color="#f2f2f2" Offset="0"/>
+            <GradientStop Color="SkyBlue" Offset="0.5"/>
+            <GradientStop Color="#f2f2f2" Offset="0.9"/>
+            <GradientStop Color="SkyBlue" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!---（2）黄色-->
+        <!--径向渐变资源:蓝色3个颜色-->
+        <LinearGradientBrush x:Key="LGB_YellowT" StartPoint="0,0" EndPoint="0,1">
+            <!--使用LinearGradientBrush渐变画刷：定义一个渐变画刷，然后需要定义渐变颜色，颜色已对角线形式渐变-->
+            <!--GradientStop:定义渐变颜色与颜色渐变始点-->
+            <GradientStop Color="#f2f2f2" Offset="0"/>
+            <GradientStop Color="AntiqueWhite" Offset="0.5"/>
+            <GradientStop Color="AntiqueWhite" Offset="1"/>
+        </LinearGradientBrush>
+        <!--径向渐变资源:蓝色4个颜色-->
+        <LinearGradientBrush  x:Key="LGB_YellowF" StartPoint="0,0" EndPoint="1,1">
+            <!--使用LinearGradientBrush渐变画刷：定义一个渐变画刷，然后需要定义渐变颜色，颜色已对角线形式渐变-->
+            <!--GradientStop:定义渐变颜色与颜色渐变始点-->
+            <GradientStop Color="#f2f2f2" Offset="0"/>
+            <GradientStop Color="AntiqueWhite" Offset="0.5"/>
+            <GradientStop Color="#f2f2f2" Offset="0.9"/>
+            <GradientStop Color="AntiqueWhite" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!--Rectangle 矩形样式-->
+        <Style x:Key="rgRope" TargetType="Rectangle">
+            <Setter Property="Width" Value="40"></Setter>
+            <Setter Property="Stroke" Value="White"></Setter>
+            <Setter Property="StrokeThickness" Value="1"></Setter>
+            <Setter Property="Fill" Value="{StaticResource LGB_BlueT}"/>
+        </Style>
+        <!--Label样式-->
+        <Style x:Key="lblText" TargetType="Label">
+            <Setter Property="FontSize" Value=" 15"/>
+            <Setter Property="FontFamily" Value=" 15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource  LGB_BlueT}"/>
+        </Style>
+        <!--TextBox样式-->
+        <Style x:Key="txtContent" TargetType="TextBox">
+            <!--边框颜色：黑色-->
+            <Setter Property="BorderBrush" Value="{StaticResource  LGB_BlueF}"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <!--边框粗度：左0，上0，右0，下1-->
+            <Setter Property="BorderThickness" Value="0,0,0,3"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="FontSize" Value=" 15"/>
+            <Setter Property="FontFamily" Value=" 15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Gray"/>
+        </Style>
+
+        <Style x:Key="HoverRed" TargetType="Grid">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <!--布局-->
+    <Border BorderThickness="2" BorderBrush="SkyBlue"  CornerRadius="2,2,2,2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="16*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <!--1、表头-->
+            <Grid Grid.Row="0" Background="#03B8E3">
+                <WrapPanel VerticalAlignment="Center">
+                    <Image Source="/Resources/Images/餐饮.png"  Height="20" Width="20" Margin="5,0,0,0"/>
+                    <TextBlock FontSize="14" Foreground="#fff" VerticalAlignment="Center" Margin="5,0,0,0">员工工作证</TextBlock>
+                </WrapPanel>
+                <Grid  Style="{StaticResource HoverRed}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <Image Source="/Resources/Images/关闭.png"  Height="20" Width="20">
+                        <Image.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=wdStaffAddOrEditWindow}" />
+                        </Image.InputBindings>
+                    </Image>
+                </Grid>
+            </Grid>
+            <!--2、内容布局-->
+            <DockPanel Grid.Row="1">
+                <!--绘制几何图形-->
+                <Canvas  DockPanel.Dock="Top">
+                    <!--1、绳子-->
+                    <Rectangle Style="{StaticResource rgRope}" Height="68" Canvas.Left="204"/>
+                    <Rectangle Style="{StaticResource rgRope}" Height="72"  Canvas.Left="207" Canvas.Top="-2">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform CenterX="0" CenterY="60" Angle="15"/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <!--2、卡扣-->
+                    <Rectangle Width="50" Height="50" Fill="White" Canvas.Left="199" Canvas.Top="68" StrokeThickness="3" RadiusY="1" RadiusX="1" Stroke="{StaticResource  LGB_BlueT}"/>
+                    <Rectangle  Width="30" Height="8" Canvas.Left="210" Canvas.Top="87"  Fill="{StaticResource  LGB_BlueT}"/>
+                </Canvas>
+                <!--3、打印内容-->
+                <DockPanel x:Name="printArea"  Margin="60,120,60,20">
+                    <!--页面内容布局-->
+                    <Border  BorderThickness="5" CornerRadius="5" Name="image" BorderBrush="{StaticResource LGB_BlueF}" Width="310">
+                        <Canvas>
+                            <!--绘图-->
+                            <Path Stroke="BlueViolet" Fill="{StaticResource  LGB_BlueF}" StrokeThickness="1" Opacity="0.3">
+                                <Path.Data>
+                                    <GeometryGroup>
+                                        <PathGeometry>
+                                            <PathFigure StartPoint="0,0">
+                                                <BezierSegment Point1="230,0" Point2="50,200" Point3="300,200"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                        <PathGeometry>
+                                            <PathFigure StartPoint="0,0">
+                                                <BezierSegment Point1="210,0" Point2="50,200" Point3="300,200"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                        <PathGeometry>
+                                            <PathFigure StartPoint="0,0">
+                                                <BezierSegment Point1="190,0" Point2="50,200" Point3="300,200"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                        <PathGeometry>
+                                            <PathFigure StartPoint="0,0">
+                                                <BezierSegment Point1="170,0" Point2="50,200" Point3="300,200"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                        <PathGeometry>
+                                            <PathFigure StartPoint="0,0">
+                                                <BezierSegment Point1="150,0" Point2="50,200" Point3="300,200"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                        <PathGeometry>
+                                            <PathFigure StartPoint="0,0">
+                                                <BezierSegment Point1="130,0" Point2="50,200" Point3="300,200"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </GeometryGroup>
+                                </Path.Data>
+                            </Path>
+                            <!--头像-->
+                            <Border Width="130" Height="126" CornerRadius="20" BorderThickness="1" BorderBrush="SkyBlue" Canvas.Left="161" Canvas.Top="19">
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding CaseCoverImage,Mode=TwoWay}"/>
+                                </Border.Background>
+                            </Border>
+                            <!--内容文本-->
+                            <Label Content="工号：" Canvas.Left="61" Canvas.Top="203" Style="{StaticResource lblText}"/>
+                            <TextBox Canvas.Top="206" RenderTransformOrigin="0.803,0.863" Canvas.Left="120" Style="{StaticResource txtContent}" Text="{Binding CurrentStaffEntity.EMPNO,Mode=TwoWay}"/>
+                            <Label Content="姓名：" Canvas.Left="61" Canvas.Top="250" Style="{StaticResource lblText}"/>
+                            <TextBox Canvas.Top="253" RenderTransformOrigin="0.803,0.863" Canvas.Left="118" Style="{StaticResource txtContent}" Text="{Binding CurrentStaffEntity.name,Mode=TwoWay}"/>
+                            <Label Content="职务：" Canvas.Left="61" Canvas.Top="300" Style="{StaticResource lblText}"/>
+                            <TextBox Canvas.Top="303" RenderTransformOrigin="0.803,0.863" Canvas.Left="120" Style="{StaticResource txtContent}" Text="{Binding CurrentStaffEntity.position,Mode=TwoWay}"/>
+                        </Canvas>
+                    </Border>
+                </DockPanel>
+            </DockPanel>
+            <!--3、打印按钮-->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <!--直接打印打印-->
+                <Button Content="直接打印" Style="{StaticResource BtnBlueFillStyle}" Margin="10" Command="{Binding PrintCommand}" CommandParameter="{Binding ElementName=printArea}"/>
+                <!--导出图片-->
+                <Button Content="导出图片" Style="{StaticResource BtnBlueFillStyle}" Margin="10" Command="{Binding ExportCommand}" CommandParameter="{Binding ElementName=printArea}"/>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>

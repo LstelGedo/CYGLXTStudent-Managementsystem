@@ -1,0 +1,242 @@
+﻿<UserControl x:Class="CYGLXTStudent.Views.Record"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:CYGLXTStudent.Resources.PublicClass"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" >
+    <!--页面Loaded-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction  Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=dgTheLoginDetails}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <Style x:Key="TextBlock_1" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Foreground" Value="#ff7b7b7b"></Setter>
+            <Setter Property="FontSize" Value="13"></Setter>
+        </Style>
+
+        <Style x:Key="SearchTextBoxStyle" BasedOn="{x:Null}" TargetType="{x:Type TextBox}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Rectangle x:Name="Bd" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" Fill="{TemplateBinding Background}"  SnapsToDevicePixels="true" RadiusX="5" RadiusY="5">
+                            </Rectangle>
+                            <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Template="{DynamicResource ScrollViewerControlTemplate1}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Fill" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    </UserControl.Resources>
+    <!--中间数据显示-->
+    <Grid Background="White"  Grid.Column="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <!--搜索框-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="4*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="4*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="5*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="4*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="4*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="4*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--工号-->
+            <TextBlock Grid.Column="1" Text="工号" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="3" VerticalAlignment="Center" Text="{Binding EMPNO}"/>
+            <!--姓名-->
+            <TextBlock Grid.Column="5" Text="姓名" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="7" VerticalAlignment="Center" Text="{Binding StaffName}"/>
+            <!--身份证号-->
+            <TextBlock Grid.Column="9" Text="身份证" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="11"  VerticalAlignment="Center" Text="{Binding IDNumber}"/>
+            <!--性别-->
+            <TextBlock Grid.Column="13" Text="性别" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="15" VerticalAlignment="Center" Text="{Binding Sex}"/>
+            <!--职务-->
+            <TextBlock Grid.Column="17" Text="职务" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="19" VerticalAlignment="Center" Text="{Binding Position}"/>
+            <!--状态-->
+            <TextBlock Grid.Column="21" Text="状态" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="23" VerticalAlignment="Center" Text="{Binding Statust}"/>
+
+            <Button Grid.Column="25"  Content="查询" Style="{StaticResource BtnBlueStyle}" Command="{Binding LoadedCommand}"/>
+            <Button Grid.Column="27"  Content="清空" Style="{StaticResource BtnYellowStyle}" Command="{Binding CleanCommand}"/>
+
+        </Grid>
+        <!--网格数据-->
+        <Grid Grid.Row="1">
+            <DataGrid x:Name="dgTheLoginDetails" IsReadOnly="True" AutoGenerateColumns="False" Background="white"
+                  CanUserResizeColumns="False" CanUserResizeRows="False"  SelectionMode="Single" 
+                  CanUserReorderColumns="False" AlternationCount="2"   CanUserAddRows="False"                 
+                  VerticalAlignment="Top" ItemsSource="{Binding Record,Mode=TwoWay}">
+                <DataGrid.Columns >
+                    <DataGridTemplateColumn Header="序号" Width="50" MinWidth="10" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding SerialNumber}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="工号" Binding="{Binding EMPNO}" Width="1*" />
+                    <DataGridTextColumn Header="姓名" Binding="{Binding name}" Width="1*" />
+                    <DataGridTextColumn Header="电话" Binding="{Binding phone}" Width="2*"/>
+                    <DataGridTextColumn Header="身份证号" Binding="{Binding IDNumber}" Width="2*" />
+                    <DataGridTextColumn Header="性别" Binding="{Binding sex}" Width="1*" />
+                    <DataGridTextColumn Header="职务" Binding="{Binding position}" Width="2*" />
+                    <DataGridTextColumn Header="登录时间"  Binding="{Binding LogonTime,StringFormat='{}{0:yyyy-MM-dd HH:mm:ss}'}" Width="2*" />
+                    <DataGridTextColumn Header="离线时间"  Binding="{Binding OfflineTime,StringFormat='{}{0:yyyy-MM-dd HH:mm:ss}'}" Width="2*" />
+                    <DataGridTextColumn Header="登录时长" Binding="{Binding TheLogin}" Width="2*" />
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <!--矩形充当：分割线-->
+        <Rectangle Grid.Row="1" Grid.Column="0" Fill="#FFEAE8E8" Height="1" VerticalAlignment="Bottom"/>
+        <!--分页-->
+        <Grid Background="White"  Grid.Row="2" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="550*"/>
+                <ColumnDefinition Width="631*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Background="{x:Null}" Orientation="Horizontal" VerticalAlignment="Center">
+                <WrapPanel Width="436"  >
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock  Padding="1" HorizontalAlignment="Left" Foreground="Black" Text="总条数："/>
+                        <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="Orange"  Text="{Binding AllCount}"/>
+                    </StackPanel>
+                </WrapPanel>
+
+            </StackPanel>
+            <StackPanel Background="{x:Null}" Orientation="Horizontal" Grid.Column="1">
+                <WrapPanel Width="633"  >
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="633" Height="27">
+                        <controls:DMButton BorderThickness="0.1" Background="White" Width="70"  Height="25">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding FirstCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <WrapPanel>
+                                <Image Height="20" Width="20" Source="/Resources/Images/首页.png"/>
+                                <Label VerticalAlignment="Center" Content="首页" Foreground="Black" />
+                            </WrapPanel>
+                        </controls:DMButton>
+                        <controls:DMButton BorderThickness="0" Background="White" Width="70"  Height="25" Margin="1,0,0,0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding LastCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <WrapPanel>
+                                <Image Height="20" Width="20" Source="/Resources/Images/上一页.png"/>
+                                <Label VerticalAlignment="Center" Content="上一页" Foreground="Black" />
+                            </WrapPanel>
+                        </controls:DMButton>
+                        <Label VerticalAlignment="Center" Content="第" Foreground="Black" Background="White" Height="25" Margin="1,0,0,0"/>
+                        <TextBox BorderThickness="0"  Width="40" Height="25" VerticalAlignment="Center" TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True"  Text="{Binding CurrentPage}"/>
+                        <Label VerticalAlignment="Center" Content="页" Foreground="Black" Background="White" Height="25" Margin="0,0,0,0"/>
+                        <Label VerticalAlignment="Center" Content="共" Foreground="Black" Background="White" Height="25" Margin="1,0,0,0"  VerticalContentAlignment="Center"/>
+                        <TextBox  BorderThickness="0"  Width="40" Height="25"  VerticalAlignment="Center" TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding MaxPage}"/>
+                        <Label VerticalAlignment="Center" Content="页" Foreground="Black" Background="White" Height="25" Margin="0,0,0,0" VerticalContentAlignment="Center"/>
+
+                        <controls:DMButton BorderThickness="0" Background="White" Width="70"  Height="25" Margin="1,0,0,0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding NextCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <WrapPanel>
+                                <Label VerticalAlignment="Center" Content="下一页" Foreground="Black" />
+                                <Image Height="20" Width="20" Source="/Resources/Images/下一页.png"/>
+                            </WrapPanel>
+                        </controls:DMButton>
+                        <controls:DMButton BorderThickness="0" Background="White" Width="70"  Height="25" Margin="1,0,0,0" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding EndCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <WrapPanel>
+                                <Label VerticalAlignment="Center" Content="尾页" Foreground="Black" />
+                                <Image Height="20" Width="20" Source="/Resources/Images/末页.png"/>
+                            </WrapPanel>
+                        </controls:DMButton>
+                        <Label VerticalAlignment="Center" Content="跳转到" Foreground="Black" Background="White" Height="25" Margin="10,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBox BorderThickness="0" Width="40" Height="25" Margin="1,0,0,0" VerticalAlignment="Center" TextAlignment="Center" VerticalContentAlignment="Center" Text="{Binding JumpPage}"/>
+
+                        <controls:DMButton BorderThickness="0" Background="White" Width="70"  Height="25" Margin="1,1,0,1" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding GoCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <WrapPanel>
+                                <Label VerticalAlignment="Center" Content="跳转" Foreground="Black" />
+                                <Image Height="20" Width="20" Source="/Resources/Images/末页.png"/>
+                            </WrapPanel>
+                        </controls:DMButton>
+
+                    </StackPanel>
+                </WrapPanel>
+
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

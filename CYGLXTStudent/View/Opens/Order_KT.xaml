@@ -1,0 +1,245 @@
+﻿<Window x:Class="CYGLXTStudent.Views.Opens.Order_KT"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:controls="clr-namespace:CYGLXTStudent.Resources.PublicClass"
+        ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"  
+        Height="700" Width="1280" Name="WOrderKT" 
+        Icon="/Resources/Images/加菜.png">
+    <!--页面加载事件-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=wpSimers}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--内容-->
+    <Border BorderThickness="2" BorderBrush="SkyBlue"  CornerRadius="2,2,2,2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="17*"/>
+            </Grid.RowDefinitions>
+            <!--表头-->
+            <Grid Grid.Row="0" Background="#03B8E3">
+                <WrapPanel VerticalAlignment="Center">
+                    <Image Source="/Resources/Images/餐饮.png"  Height="20" Width="20" Margin="5,0,0,0"/>
+                    <TextBlock FontSize="14" Foreground="#fff" VerticalAlignment="Center" Margin="5,0,0,0">开台</TextBlock>
+                </WrapPanel>
+                <Grid  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <Image Source="/Resources/Images/关闭.png"  Height="20" Width="20">
+                        <Image.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=WOrderKT}" />
+                        </Image.InputBindings>
+                    </Image>
+                </Grid>
+            </Grid>
+            <!--中间数据显示-->
+            <Grid Grid.Row="1" Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="1"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="85*"/>
+                            <ColumnDefinition Width="34*"/>
+                            <ColumnDefinition Width="35*"/>
+                            <ColumnDefinition Width="48*"/>
+                            <ColumnDefinition Width="33*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="用餐人数" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"   Foreground="#64524E" Margin="7,4,6,4" Height="23" Width="72"/>
+                        <!-- （1）减少人数 -->
+                        <Image Source="/Resources/Images/减少.png" Grid.Column="2" Height="25" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,3,6,3">
+                            <!--鼠标按下事件-->
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown" >
+                                    <i:InvokeCommandAction Command="{Binding PeopleReduceCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
+                        <!--（2）输入人数（自定义人数）-->
+                        <TextBox BorderThickness="0" Height="25" VerticalAlignment="Center" TextAlignment="Center" VerticalContentAlignment="Center"  Grid.Column="3" Margin="4,3" 
+                                 Text="{Binding PeopleNumber,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                            <!--KeyUp事件-->
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="KeyUp" >
+                                    <i:InvokeCommandAction Command="{Binding PeopleCustomCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                        <!-- （3）增加人数 -->
+                        <Image Source="/Resources/Images/增加.png" Grid.Column="4" Height="24" Width="24" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="4,4,5,3">
+                            <!--鼠标按下事件-->
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown" >
+                                    <i:InvokeCommandAction Command="{Binding PeopleIncreaseCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
+                    </Grid>
+                    <Grid Grid.Row="1" Background="#ECEDF2"/>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="11*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="＋整单备注：" VerticalAlignment="Center" FontSize="15" Foreground="Gray"/>
+                        <Border Grid.Column="1" BorderBrush="SkyBlue" BorderThickness="1,1,1,0">
+                            <TextBox TextWrapping="Wrap" FontSize="12" AcceptsReturn="True"  VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Center" Text="{Binding TableNote,Mode=TwoWay}"/>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Row="3" Background="White">
+
+                        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Background="white" 
+                                  CanUserResizeColumns="False" CanUserResizeRows="False"  SelectionMode="Single" 
+                                  CanUserReorderColumns="False" AlternationCount="2"   CanUserAddRows="False" VerticalAlignment="Top" 
+                                  controls:DataGridBehavior.RowNumbers="True"
+                                  ItemsSource="{Binding OrderDetails,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                  SelectedItem="{Binding SelectOrderEntity}">
+                            <DataGrid.Columns >
+                                <!--controls:DataGridBehavior.RowNumbers="True" 行号-->
+                                <DataGridTemplateColumn Width="45"
+                                        Header="序号"
+                                        IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTextColumn Header="菜名" Binding="{Binding dishes}" Width="150" />
+                                <DataGridTextColumn Header="单价" Binding="{Binding MenuPrice,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat='{}{0:F2}'}" Width="60" />
+                                <DataGridTemplateColumn Header="操作" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <!--菜品数量：减少-->
+                                                <controls:DMButton BorderThickness="0.1" Background="White" Width="27" Height="27" Margin="10,0,0,0" 
+                                                                   Command="{Binding DataContext.DishesReduceCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}">
+                                                    <WrapPanel>
+                                                        <Image Height="25" Width="25" Source="/Resources/Images/减少.png"/>
+                                                    </WrapPanel>
+                                                </controls:DMButton>
+                                                <!--菜品数量：输入-->
+                                                <TextBox BorderThickness="0" Height="26" Text="{Binding Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="50" VerticalAlignment="Center" TextAlignment="Center" VerticalContentAlignment="Center">
+                                                    <!--KeyUp事件-->
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="KeyUp" >
+                                                            <i:InvokeCommandAction Command="{Binding DataContext.DishesCustomCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}"/>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </TextBox>
+                                                <!--菜品数量：增加-->
+                                                <controls:DMButton BorderThickness="0.1" Background="White" Width="27" Height="27" 
+                                                                   Command="{Binding DataContext.DishesIncreaseCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}">
+                                                    <WrapPanel>
+                                                        <Image Height="25" Width="25" Source="/Resources/Images/增加.png"/>
+                                                    </WrapPanel>
+                                                </controls:DMButton>
+                                                <!--移除菜单-->
+                                                <controls:DMButton BorderThickness="0.1" Background="White" Width="27" Height="27"  Margin="10,0,0,0" 
+                                                                   Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}">
+                                                    <WrapPanel>
+                                                        <Image Height="25" Width="25" Source="/Resources/Images/取消.png"/>
+                                                    </WrapPanel>
+                                                </controls:DMButton>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    <Grid  Grid.Row="4" Background="#ECEDF2"/>
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="17*"/>
+                            <ColumnDefinition Width="203*"/>
+                            <ColumnDefinition Width="16*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="22*"/>
+                            <RowDefinition Height="22*"/>
+                            <RowDefinition Height="39*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Column="1" Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="菜品总数" Height="16" Margin="0,4" Foreground="#ff7b7b7b" FontSize="13"/>
+                            <TextBlock   Grid.Column="1"  Height="16" Margin="0,4" Foreground="#ff7b7b7b" FontSize="13" Text="{Binding DishesTotal}"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.RowSpan="1" Grid.Column="1" Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="11*"/>
+                                <ColumnDefinition Width="27*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="账单金额 ￥" Height="16" Margin="0,4" Foreground="#ff7b7b7b" FontSize="13"/>
+                            <TextBlock Grid.Column="1" Height="16" Margin="0,4" Foreground="#ff7b7b7b" FontSize="13" Text="{Binding BillAmount}"/>
+                        </Grid>
+                        <Button Content="立即下单"  BorderThickness="0"  Foreground="White" Height="35" Grid.Row="2"  Grid.Column="1" Command="{Binding OrderCommand}" CommandParameter="{Binding ElementName=WOrderKT}">
+                            <Button.Template >
+                                <ControlTemplate TargetType="{x:Type Button}" >
+                                    <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="1">
+                                        <Border.Background>#1296db</Border.Background>
+                                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                    </Grid>
+                </Grid>
+                <Border Grid.Column="1" BorderBrush="#ECEDF2" BorderThickness="1,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="12*"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Style="{StaticResource BtnBlueFillStyle}" Content="全部" Command="{Binding AllMenuCommand}"/>
+
+                            <Button Grid.Column="1" Style="{StaticResource BtnBlueFillStyle}" Content="冷菜" Command="{Binding ColdDishCommand}"/>
+
+                            <Button Grid.Column="2" Style="{StaticResource BtnBlueFillStyle}"  Content="热菜" Command="{Binding HotFoodCommand}"/>
+
+                            <Button Grid.Column="3" Style="{StaticResource BtnBlueFillStyle}" Content="糕点" Command="{Binding PastryCommand}"/>
+
+                            <Button Grid.Column="4" Style="{StaticResource BtnBlueFillStyle}"  Content="水果" Command="{Binding FruitsCommand}"/>
+
+                            <Button Grid.Column="5" Style="{StaticResource BtnBlueFillStyle}" Content="酒水饮料" Command="{Binding DrinksCommand}"/>
+                        </Grid>
+                        <ScrollViewer Grid.Row="1" Margin="0,4,0,0">
+                            <WrapPanel  x:Name="wpSimers" >
+
+                            </WrapPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

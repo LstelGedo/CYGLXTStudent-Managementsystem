@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="CYGLXTStudent.Views.DiningTable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"            
+             x:Name="ucDiningTable">
+    <!--页面加载事件-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=ucDiningTable}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--页面布局-->
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <!--1、餐桌-->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="41*"/>
+                <RowDefinition Height="600*"/>
+            </Grid.RowDefinitions>
+            <!--搜索框-->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="11*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="➕新增" x:Name="Btn_Insert" Grid.Column="1" Style="{StaticResource BtnYellowFillStyle}" Command="{Binding AddCommand}"/>
+            </Grid>
+            <!--网格数据-->
+            <Grid Grid.Row="1" Margin="0,0,0,91">
+                <!--餐桌:后台生成-->
+                <ScrollViewer>
+                    <WrapPanel  x:Name="Simers">
+                    </WrapPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        <!--2、归属-->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="17*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="17*"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="1" Style="{StaticResource BtnBlueFillStyle}" Content="全部" Command="{Binding AllCommand}"/>
+            <Button Grid.Row="2" Style="{StaticResource BtnGreenFillStyle}" Content="一楼大厅" Command="{Binding FirstCommand}"/>
+            <Button Grid.Row="3" Style="{StaticResource BtnGreenFillStyle}" Content="二楼大厅" Command="{Binding SecondCommand}"/>
+            <Button Grid.Row="4" Style="{StaticResource BtnRedFillStyle}" Content="包厢" Command="{Binding BoxCommand}"/>
+        </Grid>
+    </Grid>
+</UserControl>

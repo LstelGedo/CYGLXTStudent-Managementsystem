@@ -1,0 +1,99 @@
+﻿<Window x:Class="CYGLXTStudent.Views.DiningTables.Insert_DiningTable"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        x:Name="wdAddTable" 
+        Icon="/Resources/Images/加菜.png"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Title="新增餐桌" Height="250" Width="400">
+    <Window.Resources>
+        <Style x:Key="HoverRed" TargetType="Grid">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="PperationBtn" TargetType="Button">
+            <Setter Property="Background" Value="#FF70B353"/>
+            <Setter Property="Foreground" Value="#fff"/>
+        </Style>
+    </Window.Resources>
+    <Border BorderThickness="2" BorderBrush="SkyBlue"  CornerRadius="2,2,2,2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <!--表头-->
+            <Grid Grid.Row="0" Background="#03B8E3">
+                <WrapPanel VerticalAlignment="Center">
+                    <Image Source="/Resources/Images/餐饮.png"  Height="20" Width="20" Margin="5,0,0,0"/>
+                    <TextBlock FontSize="14" Foreground="#fff" VerticalAlignment="Center" Margin="5,0,0,0">新增餐桌</TextBlock>
+                </WrapPanel>
+                <Grid  Style="{StaticResource HoverRed}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <Image Source="/Resources/Images/关闭.png"  Height="20" Width="20">
+                        <Image.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=wdAddTable}" />
+                        </Image.InputBindings>
+                    </Image>
+                </Grid>
+            </Grid>
+            <!--内容-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <!--归属-->
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="归属：" Padding="5" />
+                <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource lbMandatory}"/>
+                <ComboBox x:Name="cboAffiliation" IsEditable="False" Grid.Column="2" Grid.Row="1" Height="28">
+                    <!--页面加载事件-->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName =cboAffiliation}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBoxItem Content="一楼大厅"></ComboBoxItem>
+                    <ComboBoxItem Content="二楼大厅"></ComboBoxItem>
+                    <ComboBoxItem Content="包厢"></ComboBoxItem>
+                </ComboBox>
+                <!--人数-->
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="人数：" Padding="5" />
+                <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource lbMandatory}"/>
+                <TextBox  Grid.Row="3" Grid.Column="2"  Text="{Binding CurrentDiningTableEntity.number,Mode=TwoWay}"/>
+                <!--餐桌编号-->
+                <TextBlock Grid.Row="5" Grid.Column="1" Text="餐桌编号：" Padding="5" />
+                <Label Grid.Row="5" Grid.Column="1" Style="{StaticResource lbMandatory}"/>
+                <TextBox  Grid.Row="5" Grid.Column="2"  Text="{Binding TableNumber,Mode=TwoWay}"/>
+            </Grid>
+            <Rectangle Grid.Row="0" Grid.Column="0" Fill="#FFEAE8E8" Height="1" VerticalAlignment="Bottom"/>
+            <Rectangle Grid.Row="1" Grid.Column="0" Fill="#FFEAE8E8" Height="1" VerticalAlignment="Bottom"/>
+            <!--操作按钮-->
+            <Grid Grid.Row="2">
+                <!--操作菜单-->
+                <WrapPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Content="确认" Margin="2,0" Style="{StaticResource BtnBlueStyle}"  Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=wdAddTable}" />
+                    <!--<Button Content="重置" Margin="2,0"   Style="{StaticResource BtnBlueStyle}"/>-->
+                </WrapPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
+

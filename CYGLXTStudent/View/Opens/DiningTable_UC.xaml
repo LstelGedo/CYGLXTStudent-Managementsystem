@@ -1,0 +1,136 @@
+﻿<UserControl x:Class="CYGLXTStudent.Views.Opens.DiningTable_UC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             Height="120" Width="140" 
+             ToolTip="1、鼠标按下（空桌:开台；待付款:结账/加菜；已付款:清理餐桌）；2、鼠标移入：查询右边菜单信息；3、鼠标移出：清除右边菜单信息。 " >
+    <!--页面Loaded-->
+    <i:Interaction.Triggers>
+        <!--Loaded 加载事件-->
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction  Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+        <!--MouseDown鼠标按下事件-->
+        <i:EventTrigger EventName="MouseDown">
+            <i:InvokeCommandAction  Command="{Binding MouseDownCommand}"/>
+        </i:EventTrigger>
+        <!--MouseEnter鼠标移入事件-->
+        <i:EventTrigger EventName="MouseEnter">
+            <i:InvokeCommandAction  Command="{Binding MouseEnterCommand}"/>
+        </i:EventTrigger>
+        <!--MouseLeave鼠标离开事件-->
+        <i:EventTrigger EventName="MouseLeave">
+            <i:InvokeCommandAction  Command="{Binding MouseLeaveCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--页面资源-->
+    <UserControl.Resources>
+        <Style  TargetType="TextBlock">
+            <!--多数据条件触发的MultiDataTrigger-->
+            <Style.Triggers>
+                <!--空桌:蓝色-->
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=Status}" Value="空桌"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Foreground" Value="#039DFF"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <!--已付款:红色-->
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=Status}" Value="已付款"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Foreground" Value="#FFF64A4A"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <!--待付款:黄色-->
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=Status}" Value="待付款"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Foreground" Value="#FEBA52"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+
+            </Style.Triggers>
+        </Style>
+        <!--Border-->
+        <Style x:Key="bdBorder" TargetType="Border">
+            <!--多数据条件触发的MultiDataTrigger-->
+            <Style.Triggers>
+                <!--空桌:蓝色-->
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=Status}" Value="空桌"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="BorderBrush" Value="#039DFF"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <!--已付款:红色-->
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=Status}" Value="已付款"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="BorderBrush" Value="#FFF64A4A"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <!--待付款:黄色-->
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=Status}" Value="待付款"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="BorderBrush" Value="#FEBA52"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <!--页面内容布局-->
+    <Border Background="White" Style="{StaticResource bdBorder}" BorderThickness="1" CornerRadius="5"  Margin="5">
+        <Grid Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <!--桌子编号-->
+                <TextBlock  FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Text="{Binding TableNumber}"/>
+                <!--人数-->
+                <TextBlock Grid.Column="1"  FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                               Text="{Binding Number}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <!--总金额-->
+                <TextBlock   FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                 Text="{Binding TotalMoney}"/>
+                <!--状态-->
+                <TextBlock Grid.Row="1"  FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Text="{Binding Status}"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <!--就餐时长-->
+                <TextBlock FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Text="{Binding DurationTime}"/>
+            </Grid>
+        </Grid>
+    </Border>
+
+</UserControl>

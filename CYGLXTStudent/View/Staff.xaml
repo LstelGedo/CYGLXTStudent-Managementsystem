@@ -1,0 +1,174 @@
+﻿<UserControl x:Class="CYGLXTStudent.Views.Staff"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:CYGLXTStudent.Resources.PublicClass"   
+             xmlns:page="clr-namespace:CYGLXTStudent.Resources.Control" 
+             Name="ucStaff"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" >
+    <!--1、页面Loaded-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction  Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--2、用户控件资源-->
+    <UserControl.Resources>
+        <!--（1）单元格：图片绑定-->
+        <controls:ConvertImageAndByte x:Key="convertImageAndByte" />
+    </UserControl.Resources>
+    <!--3、中间数据显示-->
+    <Grid Background="White" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <!--（1）搜索框-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="4*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="4*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="5*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="4*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="4*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="4*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--工号-->
+            <TextBlock Grid.Column="1" Text="工号" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="3" VerticalAlignment="Center" Text="{Binding EMPNO,Mode=TwoWay}"/>
+            <!--姓名-->
+            <TextBlock Grid.Column="5" Text="姓名" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="7" VerticalAlignment="Center" Text="{Binding StaffName,Mode=TwoWay}"/>
+            <!--身份证号-->
+            <TextBlock Grid.Column="9" Text="身份证" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="11"  VerticalAlignment="Center" Text="{Binding IDNumber,Mode=TwoWay}"/>
+            <!--性别-->
+            <TextBlock Grid.Column="13" Text="性别" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="15" VerticalAlignment="Center" Text="{Binding Sex,Mode=TwoWay}"/>
+            <!--职务-->
+            <TextBlock Grid.Column="17" Text="职务" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="19" VerticalAlignment="Center" Text="{Binding Position,Mode=TwoWay}"/>
+            <!--状态-->
+            <TextBlock Grid.Column="21" Text="状态" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="23" VerticalAlignment="Center" Text="{Binding Statust,Mode=TwoWay}"/>
+
+            <Button Grid.Column="25"  Content="清除" Style="{StaticResource BtnYellowStyle}" Command="{Binding ClearCommand}"/>
+            <Button Grid.Column="27" Content="刷新"  Style="{StaticResource  BtnGreenStyle}"  Command="{Binding LoadedCommand}"/>
+            <Button Grid.Column="29"  Content="➕新增" Style="{StaticResource BtnBlueStyle}" Command="{Binding AddCommand}"/>
+            <Button Grid.Column="31"  Content="导出" Style="{StaticResource BtnGreenStyle}" Command="{Binding ExportCommand}"/>
+            <Button Grid.Column="33"  Content="➕导入" Style="{StaticResource BtnRedStyle}" Command="{Binding ImportCommand}"/>
+        </Grid>
+        <!--（2）网格数据-->
+        <Grid Grid.Row="1">
+            <DataGrid x:Name="dgStaff" IsReadOnly="True" AutoGenerateColumns="False" Background="white" 
+                      CanUserResizeColumns="False" CanUserResizeRows="False"  SelectionMode="Single" 
+                      CanUserReorderColumns="False" AlternationCount="2" CanUserAddRows="False" 
+                      controls:DataGridBehavior.RowNumbers="True" 
+                      ItemsSource="{Binding StaffVos}" 
+                      SelectedItem="{Binding SelectStaffEntity,Mode=TwoWay}">
+                <DataGrid.Columns >
+                    <DataGridTemplateColumn Width="45" Header="序号" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="工号" Binding="{Binding EMPNO}" Width="60" />
+                    <DataGridTextColumn Header="姓名" Binding="{Binding name}" Width="80" />
+                    <DataGridTemplateColumn Header="图片" Width="100" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate  >
+                                <Grid Background="Transparent">
+                                    <!--绑定图片-->
+                                    <Image Source="{Binding picture,Converter={StaticResource convertImageAndByte}}" Stretch="Fill" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="电话" Binding="{Binding phone}" Width="100" />
+                    <DataGridTextColumn Header="身份证号" Binding="{Binding IDNumber}" Width="150" />
+                    <DataGridTextColumn Header="性别" Binding="{Binding sex}" Width="40" />
+                    <DataGridTextColumn Header="职务" Binding="{Binding position}" Width="100" />
+                    <DataGridTextColumn Header="入职时间"  Binding="{Binding entryDate,StringFormat='{}{0:yyyy-MM-dd}'}" Width="90" />
+                    <DataGridTextColumn Header="离职时间"  Binding="{Binding departureDate,StringFormat='{}{0:yyyy-MM-dd}'}" Width="90" />
+                    <DataGridTextColumn Header="状态" Binding="{Binding statust}" Width="80" />
+                    <DataGridTextColumn Header="住址" Binding="{Binding address}" Width="200" />
+                    <DataGridTemplateColumn Header="操作" MinWidth="50" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <!--打印-->
+                                    <controls:DMButton BorderThickness="0.1" Background="White" Width="50" Height="25" Command="{Binding DataContext.PrintCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" ToolTip="工作证" Visibility="{Binding IsVisibility}">
+                                        <Image Height="20" Width="20" Source="/Resources/Images/打印.png"/>
+                                    </controls:DMButton>
+                                    <!--修改-->
+                                    <controls:DMButton BorderThickness="0.1" Background="White" Width="50" Height="25" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" ToolTip="修改" Visibility="{Binding IsVisibility}">
+                                        <Image Height="20" Width="20" Source="/Resources/Images/修改.png" ToolTip="修改"/>
+                                    </controls:DMButton>
+                                    <!--离职-->
+                                    <controls:DMButton BorderThickness="0.1" Background="White" Width="50" Height="25" Command="{Binding DataContext.DepartureCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" ToolTip="离职" Visibility="{Binding IsVisibility}">
+                                        <Image Height="20" Width="20" Source="/Resources/Images/离职.png"/>
+                                    </controls:DMButton>
+                                    <!--删除-->
+                                    <controls:DMButton BorderThickness="0.1" Background="White" Width="50" Height="25" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" ToolTip="删除" Visibility="{Binding DeleteVisibility}">
+                                        <Image Height="20" Width="20" Source="/Resources/Images/删除.png"/>
+                                    </controls:DMButton>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <!--矩形充当：分割线-->
+        <Rectangle Grid.Row="1" Grid.Column="0" Fill="#FFEAE8E8" Height="1" VerticalAlignment="Bottom"/>
+        <!--（3）分页-->
+        <Grid Background="White"  Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <!--分页-->
+            <page:PagingControlTwo TotalPage="{Binding Path=TotalPage,Mode=TwoWay}" PageSize="{Binding Path=PageSize,Mode=TwoWay}" CurrentPage="{Binding Path=CurrentPage,Mode=TwoWay}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger  EventName="PageChanged">
+                        <i:InvokeCommandAction  Command="{Binding Path=NextPageSearchCommand, Mode=TwoWay}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </page:PagingControlTwo>
+        </Grid>
+    </Grid>
+</UserControl>

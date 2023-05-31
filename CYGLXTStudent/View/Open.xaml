@@ -1,0 +1,157 @@
+﻿<UserControl x:Class="CYGLXTStudent.Views.Open"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:controls="clr-namespace:CYGLXTStudent.Resources.PublicClass"   
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+             x:Name="ucOpen">
+    <!--页面加载事件-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName = ucOpen}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--中间数据显示-->
+    <Grid Background="White"  Grid.Column="1" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <!--左侧内容-->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="53*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="63*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="排号" Grid.Column="1" Style="{StaticResource BtnBlueFillStyle}"/>
+                <Button Content="一键清理" Grid.Column="2" Style="{StaticResource BtnBlueFillStyle}" Command="{Binding BtnInsertCommand}"/>
+            </Grid>
+            <!--餐桌生成-->
+            <ScrollViewer Grid.Row="1">
+                <WrapPanel Name="wpSimers">
+                </WrapPanel>
+            </ScrollViewer>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="38*"/>
+                        <ColumnDefinition Width="35*"/>
+                        <ColumnDefinition Width="15*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="#039DFF" RadiusX="15" RadiusY="15" Opacity="0.8" Grid.ColumnSpan="3"/>
+                    <TextBlock Text="空桌"  Foreground="White" Height="18" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Height="18" Foreground="White" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding EmptyNumber}"/>
+                </Grid>
+                <Grid Grid.Column="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="38*"/>
+                        <ColumnDefinition Width="35*"/>
+                        <ColumnDefinition Width="15*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="#FEBA52" RadiusX="15" RadiusY="15" Opacity="0.8" Grid.ColumnSpan="3"/>
+                    <TextBlock Text="待付款" Height="18" Foreground="White" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Height="18" Foreground="White" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding StayNumber}"/>
+                </Grid>
+                <Grid Grid.Column="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="38*"/>
+                        <ColumnDefinition Width="35*"/>
+                        <ColumnDefinition Width="15*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="#FFF64A4A" RadiusX="15" RadiusY="15" Opacity="0.8" Grid.ColumnSpan="3"/>
+                    <TextBlock Foreground="White" Text="已付款"  Height="18" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Foreground="White" Grid.Column="1" Height="18"  FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding PaymentNumber}"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        <!--右侧内容-->
+        <Border Grid.Column="1" BorderBrush="#ECEDF2" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <!--标题-->
+                <TextBlock Grid.Row="0" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding TitleGuide}"/>
+                <!--订单明细表格数据-->
+                <DataGrid Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False" Background="white" CanUserResizeColumns="False" CanUserResizeRows="False"  
+                              SelectionMode="Single" CanUserReorderColumns="False" AlternationCount="2" CanUserAddRows="False" VerticalAlignment="Top" 
+                              ItemsSource="{Binding OrderDetails,Mode=TwoWay}" controls:DataGridBehavior.RowNumbers="True">
+                    <DataGrid.Columns >
+                        <DataGridTemplateColumn Width="50" Header="序号" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="菜名" Binding="{Binding Dishes}" Width="2*" />
+                        <DataGridTextColumn Header="数量" Binding="{Binding Quantity}" Width="1*" />
+                        <DataGridTextColumn Header="单价" Binding="{Binding Price,StringFormat='{}{0:F2}'}" Width="1*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Grid Grid.Row="2" Background="#ECEDF2"/>
+                <!--订单明细统计信息-->
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="21*"/>
+                        <ColumnDefinition Width="243*"/>
+                        <ColumnDefinition Width="19*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="27*"/>
+                        <RowDefinition Height="27*"/>
+                        <RowDefinition Height="27*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="77*"/>
+                            <ColumnDefinition Width="122*"/>
+                            <ColumnDefinition Width="44*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="菜品总数:" FontSize="15" VerticalAlignment="Center"/>
+                        <TextBlock  Grid.Column="1" FontSize="15" VerticalAlignment="Center" Text="{Binding DishesAmount}"/>
+                    </Grid>
+                    <Grid Grid.Column="1"  Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="77*"/>
+                            <ColumnDefinition Width="122*"/>
+                            <ColumnDefinition Width="44*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="账单金额 ￥:"  FontSize="15" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" FontSize="15" VerticalAlignment="Center" Text="{Binding BillAmount}"/>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="12*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="下单时间:" FontSize="15" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" FontSize="15" VerticalAlignment="Center" Text="{Binding OrderTime}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

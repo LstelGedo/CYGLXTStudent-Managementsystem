@@ -1,0 +1,114 @@
+﻿<Window x:Class="CYGLXTStudent.Views.Members.VipAddOrEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        x:Name="wdVipAddOrEdit" 
+        Icon="/Resources/Images/加菜.png"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Title="会员卡编辑" Height="340" Width="400">
+    <Window.Resources>
+        <Style x:Key="HoverRed" TargetType="Grid">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="PperationBtn" TargetType="Button">
+            <Setter Property="Background" Value="#FF70B353"/>
+            <Setter Property="Foreground" Value="#fff"/>
+        </Style>
+    </Window.Resources>
+    <Border BorderThickness="2" BorderBrush="SkyBlue"  CornerRadius="2,2,2,2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <!--表头-->
+            <Grid Grid.Row="0" Background="#03B8E3">
+                <WrapPanel VerticalAlignment="Center">
+                    <Image Source="/Resources/Images/餐饮.png"  Height="20" Width="20" Margin="5,0,0,0"/>
+                    <TextBlock FontSize="14" Foreground="#fff" VerticalAlignment="Center" Margin="5,0,0,0">会员卡编辑</TextBlock>
+                </WrapPanel>
+                <Grid  Style="{StaticResource HoverRed}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <Image Source="/Resources/Images/关闭.png"  Height="20" Width="20">
+                        <Image.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=wdVipAddOrEdit}" />
+                        </Image.InputBindings>
+                    </Image>
+                </Grid>
+            </Grid>
+            <!--内容-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="79*"/>
+                    <ColumnDefinition Width="238*"/>
+                    <ColumnDefinition Width="21*"/>
+                    <ColumnDefinition Width="19*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="会员类型：" Padding="5" Margin="0,0,0,15" Grid.RowSpan="2" />
+                <Label Grid.Column="1" Style="{StaticResource lbMandatory}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="63,15,0,15" Grid.RowSpan="3"/>
+                <ComboBox Grid.Column="2" x:Name="cboMember" ItemsSource="{Binding Members}" DisplayMemberPath="type" SelectedValuePath="memberID" SelectedValue="{Binding CurrentVIPEntity.memberID}" Margin="0,15,0,15" Grid.RowSpan="3">
+                    <!--下拉框改变事件-->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <!--CommandParameter传递参数：下拉框名-->
+                            <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName =cboMember}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="卡号：" Padding="5" Margin="0,0,0,15" Grid.RowSpan="2" />
+                <Label Grid.Row="2" Grid.Column="1" Style="{StaticResource lbMandatory}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="63,15,0,15" Grid.RowSpan="3"/>
+                <!--卡号:自动生成-->
+                <TextBox  Grid.Row="2" Grid.Column="2"  Text="{Binding CarNumber,Mode=TwoWay}" IsReadOnly="True" Margin="0,15,0,15" Grid.RowSpan="3"/>
+                <TextBlock Grid.Row="5" Grid.Column="1" Text="姓名：" Padding="5" />
+                <Label Grid.Row="5" Grid.Column="1" Style="{StaticResource lbMandatory}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="63,0,0,0"/>
+                <TextBox  Grid.Row="5" Grid.Column="2"  Text="{Binding CurrentVIPEntity.name,Mode=TwoWay}"/>
+                <TextBlock Grid.Row="7" Grid.Column="1" Text="电话：" Padding="5" />
+                <Label Grid.Row="7" Grid.Column="1" Style="{StaticResource lbMandatory}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="63,0,0,0"/>
+                <!--加上UpdateSourceTrigger=PropertyChanged,使得界面的操作对数据模型的修改能实时反映到数据
+                UpdateSourceTrigger的作用是 当数据属性改变的时候触发通知数据源我们做了改变。-->
+                <TextBox  Grid.Row="7" Grid.Column="2"  Text="{Binding CurrentVIPEntity.phone,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" MaxLength="11">
+                    <!--电话KeyUp：验证电话-->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="KeyUp">
+                            <i:InvokeCommandAction Command="{Binding ValidatePhoneCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+                <TextBlock Grid.Row="9" Grid.Column="1" Text="密码：" Padding="5" />
+                <Label Grid.Row="9" Grid.Column="1" Style="{StaticResource lbMandatory}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="63,0,0,0"/>
+                <TextBox  Grid.Row="9" Grid.Column="2"  Text="{Binding CurrentVIPEntity.password,Mode=TwoWay}"/>
+            </Grid>
+            <Rectangle Grid.Row="0" Grid.Column="0" Fill="#FFEAE8E8" Height="1" VerticalAlignment="Bottom"/>
+            <Rectangle Grid.Row="1" Grid.Column="0" Fill="#FFEAE8E8" Height="1" VerticalAlignment="Bottom"/>
+            <!--操作按钮-->
+            <Grid Grid.Row="2">
+                <!--操作菜单-->
+                <WrapPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Content="确认" Margin="2,0" Style="{StaticResource BtnBlueStyle}"  Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=wdVipAddOrEdit}" />
+                    <Button Content="重置" Margin="2,0"  Command="{Binding ResetCommand}" Style="{StaticResource BtnBlueStyle}"/>
+                </WrapPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

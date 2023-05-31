@@ -1,0 +1,101 @@
+﻿<Window x:Class="CYGLXTStudent.Views.PermissionUsers.PermissionUserAddOrEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        x:Name="wdPermissionUserAddOrEdit"
+        Icon="/Resources/Images/加菜.png"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Title="权限组_用户操作" Height="260" Width="400">
+    <!--页面Loaded事件-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <!--加载命令-->
+            <i:InvokeCommandAction  Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--窗口资源-->
+    <Window.Resources>
+        <!--Grid：网格样式-->
+        <Style x:Key="HoverRed" TargetType="Grid">
+            <Style.Triggers>
+                <!--鼠标移入：背景红色、手势手型-->
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--Button：按钮样式-->
+        <Style x:Key="PperationBtn" TargetType="Button">
+            <Setter Property="Background" Value="#FF70B353"/>
+            <Setter Property="Foreground" Value="#fff"/>
+        </Style>
+    </Window.Resources>
+    <!--窗口布局-->
+    <Border BorderThickness="2" BorderBrush="SkyBlue"  CornerRadius="2,2,2,2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <!--1、表头-->
+            <Grid Grid.Row="0" Background="#03B8E3">
+                <WrapPanel VerticalAlignment="Center">
+                    <Image Source="/Resources/Images/餐饮.png"  Height="20" Width="20" Margin="5,0,0,0"/>
+                    <TextBlock FontSize="14" Foreground="#fff" VerticalAlignment="Center" Margin="5,0,0,0">权限组_用户操作</TextBlock>
+                </WrapPanel>
+                <Grid  Style="{StaticResource HoverRed}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <Image Source="/Resources/Images/关闭.png"  Height="20" Width="20">
+                        <Image.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=wdPermissionUserAddOrEdit}" />
+                        </Image.InputBindings>
+                    </Image>
+                </Grid>
+            </Grid>
+            <!--2、内容-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <!--权限组-->
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="权限组：" Padding="5" />
+                <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource lbMandatory}"/>
+                <ComboBox  Grid.Row="1" Grid.Column="2" ItemsSource="{Binding JurisdictionGroups}" DisplayMemberPath="jurisdictionGroupMC" SelectedValuePath="jurisdictionGroupID" SelectedValue="{Binding JurisdictionGroupUserEntity.jurisdictionGroupID}" />
+                <!--用户-->
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="用户：" Padding="5" />
+                <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource lbMandatory}"/>
+                <ComboBox  Grid.Row="3" Grid.Column="2"  ItemsSource="{Binding Staffs}" DisplayMemberPath="name" SelectedValuePath="staffID" SelectedValue="{Binding JurisdictionGroupUserEntity.staffID}" />
+                <!--描述-->
+                <TextBlock Grid.Row="5" Grid.Column="1" Text="描述：" Padding="5" />
+                <TextBox  Grid.Row="5" Grid.Column="2" TextWrapping="Wrap" AcceptsReturn="True"  VerticalScrollBarVisibility="Visible"  
+                          Text="{Binding JurisdictionGroupUserEntity.designation,Mode=TwoWay}"/>
+            </Grid>
+            <Rectangle Grid.Row="0" Grid.Column="0" Fill="#FFEAE8E8" Height="1" VerticalAlignment="Bottom"/>
+            <Rectangle Grid.Row="1" Grid.Column="0" Fill="#FFEAE8E8" Height="1" VerticalAlignment="Bottom"/>
+            <!--3、操作按钮-->
+            <Grid Grid.Row="2">
+                <!--操作菜单-->
+                <WrapPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!--CommandParameter传递参数：wdPermissionUserAddOrEdit-->
+                    <Button Content="确认" Margin="2,0" Style="{StaticResource BtnBlueStyle}"  Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=wdPermissionUserAddOrEdit}" />
+                    <Button Content="重置" Margin="2,0"   Style="{StaticResource BtnBlueStyle}" Command="{Binding ResetCommand}"/>
+                </WrapPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

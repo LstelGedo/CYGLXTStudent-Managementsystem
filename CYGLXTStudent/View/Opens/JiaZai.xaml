@@ -1,0 +1,16 @@
+﻿<Window x:Class="CYGLXTStudent.Views.Opens.JiaZai"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        Icon="/Resources/Images/加菜.png"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        WindowStyle="none"
+        Title="LoadingLayer" Height="176" Width="300">
+    <!--可以通过控制台或者Nuget安装-->
+    <!--Install-Package WpfAnimatedGif-->
+    <Image gif:ImageBehavior.AnimatedSource="/Resources/Images/加载层02.gif"/>
+</Window>
+

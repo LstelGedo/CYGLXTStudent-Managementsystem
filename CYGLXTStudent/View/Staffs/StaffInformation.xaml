@@ -1,0 +1,167 @@
+﻿<Window x:Class="CYGLXTStudent.Views.Staffs.StaffInformation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        Title="个人信息" 
+        Icon="/Resources/Images/加菜.png"
+        Height="520" Width="720"
+        ResizeMode="NoResize" WindowStyle="None"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Name="wdStaffInformation" >
+    <!--页面加载事件-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <!--定义动漫效果-->
+        <Storyboard x:Key="Storyboard1" BeginTime="0:0:0">
+            <!--右边窗口-->
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin"  Storyboard.TargetName="grid1">
+                <LinearThicknessKeyFrame KeyTime="0:0:0.10" Value="356,0,-356,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.30" Value="316,0,-316,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.40" Value="277,0,-277,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.50" Value="237,0,-237,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.60" Value="198,0,-198,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.70" Value="158,0,-158,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.80" Value="119,0,-119,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.90" Value="79,0,-79,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:1.00" Value="40,0,-40,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:1.10" Value="0,0,0,0"></LinearThicknessKeyFrame>
+            </ThicknessAnimationUsingKeyFrames>
+
+            <!--左边窗口-->
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin"  Storyboard.TargetName="grid">
+                <LinearThicknessKeyFrame KeyTime="0:0:0.10" Value="-356,0,356,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.30" Value="-316,0,316,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.40" Value="-277,0,277,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.50" Value="-237,0,237,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.60" Value="-198,0,198,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.70" Value="-158,0,158,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.80" Value="-119,0,119,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:0.90" Value="-79,0,79,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:1.00" Value="-40,0,40,0"></LinearThicknessKeyFrame>
+                <LinearThicknessKeyFrame KeyTime="0:0:1.10" Value="0,0,0,0"></LinearThicknessKeyFrame>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <!--Grid样式-->
+        <Style x:Key="HoverRed" TargetType="Grid">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--TextBlock样式：标签-->
+        <Style x:Key="tbTitle" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <!--TextBlock样式：内容-->
+        <Style x:Key="tbContent" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="SkyBlue"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="SongTi"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+    <Window.Triggers>
+        <!--事件触发器-->
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <!--窗体触发的时候调用故事版 Storyboard1-->
+            <!--StaticResource  引用资源。-->
+            <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Border BorderThickness="2" BorderBrush="SkyBlue"  CornerRadius="2,2,2,2">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <!--左边图片-->
+            <Grid Grid.Column="0" x:Name="grid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="个人信息" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="SkyBlue"/>
+                <!--图片-->
+                <Ellipse Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="120">
+                    <Ellipse.Fill>
+                        <ImageBrush Stretch="Fill" ImageSource="{Binding ImgPicture,Mode=TwoWay}"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <!--按钮-->
+                <Button Grid.Row="2" Content="修改密码" VerticalAlignment="Top" Style="{StaticResource BtnBlueFillStyle}" Command="{Binding UpdatePasswordCommand}"/>
+            </Grid>
+            <Grid Grid.Column="1" Background="SkyBlue"/>
+            <!--右边信息-->
+            <Grid Grid.Column="2" x:Name="grid1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="41*"/>
+                    <RowDefinition Height="479*"/>
+                </Grid.RowDefinitions>
+                <!--表头-->
+                <Grid Grid.Row="0" Background="#03B8E3">
+                    <Grid  Style="{StaticResource HoverRed}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                        <Image Source="/Resources/Images/关闭.png"  Height="20" Width="20">
+                            <Image.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=wdStaffInformation}" />
+                            </Image.InputBindings>
+                        </Image>
+                    </Grid>
+                </Grid>
+                <Grid  Grid.Row="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="34*"/>
+                        <RowDefinition Height="34*"/>
+                        <RowDefinition Height="34*"/>
+                        <RowDefinition Height="34*"/>
+                        <RowDefinition Height="34*"/>
+                        <RowDefinition Height="34*"/>
+                        <RowDefinition Height="34*"/>
+                        <RowDefinition Height="34*"/>
+                        <RowDefinition Height="34*"/>
+                        <RowDefinition Height="34*"/>
+                        <RowDefinition Height="36*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="工号：" Padding="5" Grid.Column="1" Style="{StaticResource tbTitle}"/>
+                    <TextBlock  Grid.Column="3" Text="{Binding CurrentStaffVo.EMPNO}" Style="{StaticResource tbContent}"/>
+                    <TextBlock Text="姓名：" Grid.Column="1" Grid.Row="1" Style="{StaticResource tbTitle}"/>
+                    <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding CurrentStaffVo.name}"  Style="{StaticResource tbContent}"/>
+                    <TextBlock Text="电话：" Grid.Row="2" Grid.Column="1" Style="{StaticResource tbTitle}"/>
+                    <TextBlock Grid.Column="3"  Grid.Row="2" Text="{Binding CurrentStaffVo.phone}"  Style="{StaticResource tbContent}"/>
+                    <TextBlock Text="身份证号码：" Grid.Column="1"  Grid.Row="3"  Style="{StaticResource tbTitle}"/>
+                    <TextBlock Grid.Column="3"  Grid.Row="3" Text="{Binding CurrentStaffVo.IDNumber}"  Style="{StaticResource tbContent}"/>
+                    <TextBlock Text="性别：" Grid.Column="1" Grid.Row="4" Style="{StaticResource tbTitle}"/>
+                    <TextBlock  Grid.Column="3"  Grid.Row="4" Text="{Binding CurrentStaffVo.sex}"  Style="{StaticResource tbContent}"/>
+                    <TextBlock Text="年龄：" Grid.Column="1" Grid.Row="5"  Style="{StaticResource tbTitle}"/>
+                    <TextBlock Grid.Column="3"  Grid.Row="5" Text="{Binding Age}"  Style="{StaticResource tbContent}"/>
+                    <TextBlock Text="职务：" Grid.Column="1"   Grid.Row="6"  Style="{StaticResource tbTitle}"/>
+                    <TextBlock Grid.Column="3"  Grid.Row="6" Text="{Binding CurrentStaffVo.position}"  Style="{StaticResource tbContent}"/>
+                    <TextBlock Text="入职日期：" Grid.Column="1"   Grid.Row="7"  Style="{StaticResource tbTitle}"/>
+                    <TextBlock Grid.Column="3"  Grid.Row="7" Text="{Binding CurrentStaffVo.StrEntryDate}"  Style="{StaticResource tbContent}"/>
+                    <TextBlock Text="状态：" Grid.Column="1" Grid.Row="8"  Style="{StaticResource tbTitle}"/>
+                    <TextBlock Grid.Column="3"  Grid.Row="8" Text="{Binding CurrentStaffVo.statust}"  Style="{StaticResource tbContent}"/>
+                    <TextBlock Text="住址：" Grid.Column="1"  Grid.Row="9"  Style="{StaticResource tbTitle}"/>
+                    <TextBlock Grid.Column="3"  Grid.Row="9" Text="{Binding CurrentStaffVo.address}"  Style="{StaticResource tbContent}"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

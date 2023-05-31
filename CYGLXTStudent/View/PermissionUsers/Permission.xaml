@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="CYGLXTStudent.Views.PermissionUsers.Permission"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:controls="clr-namespace:CYGLXTStudent.Resources.PublicClass" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+             Name="ucPermission">
+    <!--页面Loaded-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction  Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--页面布局-->
+    <Grid Background="White" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="11*"/>
+        </Grid.RowDefinitions>
+        <!--1、条件和操作按钮-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="4*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="4*"/>
+
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <!--权限-->
+            <TextBlock Grid.Column="1" Text="权限组" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="3" VerticalAlignment="Center" Text="{Binding JurisdictionGroupMC,Mode=TwoWay}"/>
+            <!--描述-->
+            <TextBlock Grid.Column="5" Text="权限组描述" VerticalAlignment="Center" Foreground="Black"/>
+            <TextBox Grid.Column="7" VerticalAlignment="Center" Text="{Binding Describe,Mode=TwoWay}"/>
+            <!--操作按钮-->
+            <Button Grid.Column="9" Content="刷新"  Style="{StaticResource  BtnGreenStyle}" Command="{Binding QueryCommand}"/>
+            <Button Grid.Column="11"  Content="➕新增" Style="{StaticResource BtnBlueStyle}" Command="{Binding AddCommand}"/>
+        </Grid>
+        <!--2、表格数据-->
+        <Grid Grid.Row="1">
+            <!--行列划分-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!--左边内容：权限信息-->
+            <!--权限信息-->
+            <GroupBox Grid.Column="0" Header="权限信息">
+                <DataGrid IsReadOnly="True" AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" SelectionMode="Single" CanUserReorderColumns="False" AlternationCount="2"  RowHeaderWidth="0" CanUserAddRows="False" Background="White" controls:DataGridBehavior.RowNumbers="True" ItemsSource="{Binding JurisdictionGroups}" SelectedItem="{Binding JurisdictionGroupEntity, Mode=TwoWay}" >
+                    <!--表格选中行改变事件-->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <!--RelativeSource指定与当前控件相对位置的控件作为数据绑定的源。-->
+                            <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" CommandParameter="10" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="45" Header="序号" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="权限组ID"  Width="1*" Binding="{Binding jurisdictionGroupID}" Visibility="Collapsed"/>
+                        <DataGridTextColumn Header="权限组"  Width="1*" Binding="{Binding jurisdictionGroupMC}"/>
+                        <DataGridTextColumn Header="权限组描述"  Width="2*" Binding="{Binding describe}"/>
+                        <DataGridTemplateColumn Header="操作" MinWidth="50" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <controls:DMButton BorderThickness="0.1" Background="White" Width="50" Height="25" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" ToolTip="修改"  Visibility="{Binding IsVisibility}">
+                                            <Image Height="20" Width="20" Source="/Resources/Images/修改.png" ToolTip="修改"/>
+                                        </controls:DMButton>
+
+                                        <controls:DMButton BorderThickness="0.1" Background="White" Width="50" Height="25" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}}" ToolTip="删除"  Visibility="{Binding IsVisibility}">
+                                            <Image Height="20" Width="20" Source="/Resources/Images/离职.png"/>
+                                        </controls:DMButton>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <!--右边内容：菜单明细-->
+            <GroupBox Grid.Column="1" Header="模块明细信息">
+                <DataGrid IsReadOnly="True" AutoGenerateColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False"  SelectionMode="Single" CanUserReorderColumns="False" AlternationCount="2"  RowHeaderWidth="0" CanUserAddRows="False" Background="White" controls:DataGridBehavior.RowNumbers="True" ItemsSource="{Binding JurisdictionGroupModuleVo}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="45" Header="序号" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="权限组模块ID"  Width="1*" Binding="{Binding jurisdictionGroupModuleID}" Visibility="Collapsed"/>
+                        <DataGridTextColumn Header="模块ID"  Width="1*" Binding="{Binding moduleID}" Visibility="Collapsed"/>
+                        <DataGridTextColumn Header="权限组ID"  Width="1*" Binding="{Binding jurisdictionGroupID}" Visibility="Collapsed"/>
+                        <DataGridTextColumn Header="模块"  Width="1*" Binding="{Binding Module}"/>
+                        <DataGridTextColumn Header="模块功能描述" Width="2*" Binding="{Binding ModuleDescribe}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</UserControl>
+

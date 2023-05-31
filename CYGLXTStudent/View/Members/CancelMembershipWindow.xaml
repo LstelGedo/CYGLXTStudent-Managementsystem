@@ -1,0 +1,106 @@
+﻿<Window x:Class="CYGLXTStudent.Views.Members.CancelMembershipWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        x:Name="wdCancelMembershipWindow" 
+        Icon="/Resources/Images/加菜.png"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Title="会员退费" Height="300" Width="400">
+    <!--页面Loaded-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction  Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <Style x:Key="HoverRed" TargetType="Grid">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="PperationBtn" TargetType="Button">
+            <Setter Property="Background" Value="#FF70B353"/>
+            <Setter Property="Foreground" Value="#fff"/>
+        </Style>
+    </Window.Resources>
+    <Border BorderThickness="2" BorderBrush="SkyBlue"  CornerRadius="2,2,2,2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <!--表头-->
+            <Grid Grid.Row="0" Background="#03B8E3">
+                <WrapPanel VerticalAlignment="Center">
+                    <Image Source="/Resources/Images/餐饮.png"  Height="20" Width="20" Margin="5,0,0,0"/>
+                    <TextBlock FontSize="14" Foreground="#fff" VerticalAlignment="Center" Margin="5,0,0,0">会员退费</TextBlock>
+                </WrapPanel>
+                <Grid  Style="{StaticResource HoverRed}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <Image Source="/Resources/Images/关闭.png"  Height="20" Width="20">
+                        <Image.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=wdCancelMembershipWindow}" />
+                        </Image.InputBindings>
+                    </Image>
+                </Grid>
+            </Grid>
+            <!--内容-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <!--卡号-->
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="卡号：" Padding="5" />
+                <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource lbMandatory}"/>
+                <TextBlock  Grid.Row="1" Grid.Column="2"  Text="{Binding CurrentVIPVoEntity.cardNo,Mode=TwoWay}"/>
+                <!--姓名-->
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="姓名：" Padding="5" />
+                <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource lbMandatory}"/>
+                <TextBlock  Grid.Row="3" Grid.Column="2"  Text="{Binding CurrentVIPVoEntity.name,Mode=TwoWay}"/>
+                <!--可用余额-->
+                <TextBlock Grid.Row="5" Grid.Column="1" Text="可用余额：" Padding="5" />
+                <Label Grid.Row="5" Grid.Column="1" Style="{StaticResource lbMandatory}"/>
+                <TextBlock  Grid.Row="5" Grid.Column="2"  Text="{Binding CurrentVIPVoEntity.availableBalance,Mode=TwoWay}"  FontSize="14" FontWeight="Bold" Foreground="SkyBlue"/>
+                <!--需退费-->
+                <TextBlock Grid.Row="7" Grid.Column="1" Text="需退费：" Padding="5"/>
+                <Label Grid.Row="7" Grid.Column="1" Style="{StaticResource lbMandatory}"/>
+                <TextBlock  Grid.Row="7" Grid.Column="2"  Text="{Binding CurrentVIPVoEntity.availableBalance,Mode=TwoWay}" FontSize="14" FontWeight="Bold" Foreground="Red"/>
+                <!--请输入密码-->
+                <TextBlock Grid.Row="9" Grid.Column="1" Text="请输入密码：" Padding="5" />
+                <Label Grid.Row="9" Grid.Column="1" Style="{StaticResource lbMandatory}"/>
+                <TextBox  Grid.Row="9" Grid.Column="2"  Text="{Binding CurrentVIPVoEntity.password,Mode=TwoWay}"/>
+            </Grid>
+            <Rectangle Grid.Row="0" Grid.Column="0" Fill="#FFEAE8E8" Height="1" VerticalAlignment="Bottom"/>
+            <Rectangle Grid.Row="1" Grid.Column="0" Fill="#FFEAE8E8" Height="1" VerticalAlignment="Bottom"/>
+            <!--操作按钮-->
+            <Grid Grid.Row="2">
+                <!--操作菜单-->
+                <WrapPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Content="确认" Margin="2,0" Style="{StaticResource BtnBlueStyle}" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=wdCancelMembershipWindow}"/>
+                    <!--<Button Content="重置" Margin="2,0"   Style="{StaticResource BtnBlueStyle}"/>-->
+                </WrapPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

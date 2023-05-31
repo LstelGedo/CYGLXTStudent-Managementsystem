@@ -1,0 +1,670 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A263A367-AD9D-4703-BA1B-ED866B3DA8F4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CYGLXTStudent</RootNamespace>
+    <AssemblyName>CYGLXTStudent</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Msl.HtmlEditor, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Msl.HtmlEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9e7cd3b544a090dc, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.2.0.2\lib\net40\WpfAnimatedGif.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Model\B_EatInRecord.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\B_Order.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\B_Orderdetails.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\B_OutboundList.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\B_TheCargoDetail.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\B_VIPConsumptionDetails.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CYGLXTModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CYGLXTModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CYGLXTModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CYGLXTModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CYGLXTModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\R_JurisdictionGroupModule.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\R_JurisdictionGroupUser.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagrams.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_Account.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_AmountOfDetail.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_DiningTable.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_FinancialSubsidiary.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_Information.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_JurisdictionGroup.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_JurisdictionModule.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_MaterialsAre.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_Member.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_Menu.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_Staff.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_TheLoginDetails.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_TInventory.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\S_VIP.cs">
+      <DependentUpon>CYGLXTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Vo\AccountVo.cs" />
+    <Compile Include="Model\Vo\MembersPayVo.cs" />
+    <Compile Include="Model\Vo\MenuVo.cs" />
+    <Compile Include="Model\Vo\OrderVo.cs" />
+    <Compile Include="Model\Vo\RememberAccount.cs" />
+    <Compile Include="Model\Vo\StaffVo.cs" />
+    <Compile Include="Model\Vo\VipVo.cs" />
+    <Compile Include="Resources\Control\PagingControl.xaml.cs">
+      <DependentUpon>PagingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Control\PagingControlTwo.xaml.cs">
+      <DependentUpon>PagingControlTwo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Control\UCTabItemWithClose.xaml.cs">
+      <DependentUpon>UCTabItemWithClose.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\PublicClass\ByteToBitmapimage.cs" />
+    <Compile Include="Resources\PublicClass\CheckIDCard18.cs" />
+    <Compile Include="Resources\PublicClass\ConvertImageAndByte.cs" />
+    <Compile Include="Resources\PublicClass\DataGridBehavior.cs" />
+    <Compile Include="Resources\PublicClass\DMButton.cs" />
+    <Compile Include="Resources\PublicClass\DMTextBox.cs" />
+    <Compile Include="Resources\PublicClass\FindVisualChildren.cs" />
+    <Compile Include="Resources\PublicClass\GetImage.cs" />
+    <Compile Include="Resources\PublicClass\ImportToExcel.cs" />
+    <Compile Include="Resources\PublicClass\ListToDataTable.cs" />
+    <Compile Include="Resources\PublicClass\ModelConvertHelper.cs" />
+    <Compile Include="Resources\PublicClass\Node.cs" />
+    <Compile Include="Resources\PublicClass\PublicStaticMethod.cs" />
+    <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\DiningTables\DiningTableXSViewModel.cs" />
+    <Compile Include="ViewModel\DiningTables\InsertTableViewModel.cs" />
+    <Compile Include="ViewModel\DiningTableViewModel.cs" />
+    <Compile Include="ViewModel\HomePageViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Members\CancelMembershipViewModel.cs" />
+    <Compile Include="ViewModel\Members\MemberAddOrEditViewModel.cs" />
+    <Compile Include="ViewModel\Members\MemberCardViewModel.cs" />
+    <Compile Include="ViewModel\Members\UpdatePasswordViewModel.cs" />
+    <Compile Include="ViewModel\Members\VipAddOrEditViewModel.cs" />
+    <Compile Include="ViewModel\MemberViewModel.cs" />
+    <Compile Include="ViewModel\Menus\MenuAddOrEditViewModel.cs" />
+    <Compile Include="ViewModel\Menus\MenuUCViewModel.cs" />
+    <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="ViewModel\Opens\DiningOptionsViewModel.cs" />
+    <Compile Include="ViewModel\Opens\DiningTableViewModel.cs" />
+    <Compile Include="ViewModel\Opens\DMenuUCViewModel.cs" />
+    <Compile Include="ViewModel\Opens\MembersCheckoutViewModel.cs" />
+    <Compile Include="ViewModel\Opens\OrderJCViewModel.cs" />
+    <Compile Include="ViewModel\Opens\OrderKTViewModel.cs" />
+    <Compile Include="ViewModel\OpenViewModel.cs" />
+    <Compile Include="ViewModel\RecordViewModel.cs" />
+    <Compile Include="ViewModel\Staffs\ImportStaffViewModel.cs" />
+    <Compile Include="ViewModel\Staffs\PrintStaffViewModel.cs" />
+    <Compile Include="ViewModel\Staffs\StaffAddOrEditViewModel.cs" />
+    <Compile Include="ViewModel\Staffs\StaffInformationViewModel.cs" />
+    <Compile Include="ViewModel\StaffViewModel.cs" />
+    <Compile Include="ViewModel\XpenseTrackerViewModel.cs" />
+    <Compile Include="View\Account.xaml.cs">
+      <DependentUpon>Account.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DiningTable.xaml.cs">
+      <DependentUpon>DiningTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DiningTables\DiningTable_XS_UC.xaml.cs">
+      <DependentUpon>DiningTable_XS_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DiningTables\Insert_DiningTable.xaml.cs">
+      <DependentUpon>Insert_DiningTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Information.xaml.cs">
+      <DependentUpon>Information.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Informations\Information_HF.xaml.cs">
+      <DependentUpon>Information_HF.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Informations\Information_XQ.xaml.cs">
+      <DependentUpon>Information_XQ.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Member.xaml.cs">
+      <DependentUpon>Member.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Members\CancelMembershipWindow.xaml.cs">
+      <DependentUpon>CancelMembershipWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Members\MemberAddOrEditWindow.xaml.cs">
+      <DependentUpon>MemberAddOrEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Members\MemberCardWindow.xaml.cs">
+      <DependentUpon>MemberCardWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Members\UpdatePasswordWindow.xaml.cs">
+      <DependentUpon>UpdatePasswordWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Members\VipAddOrEditWindow.xaml.cs">
+      <DependentUpon>VipAddOrEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Menus\MenuAddOrEditWindow.xaml.cs">
+      <DependentUpon>MenuAddOrEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Menus\Menu_UC.xaml.cs">
+      <DependentUpon>Menu_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Open.xaml.cs">
+      <DependentUpon>Open.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Opens\DiningTable_UC.xaml.cs">
+      <DependentUpon>DiningTable_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Opens\Dining_Options.xaml.cs">
+      <DependentUpon>Dining_Options.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Opens\DMenu_UC.xaml.cs">
+      <DependentUpon>DMenu_UC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Opens\JiaZai.xaml.cs">
+      <DependentUpon>JiaZai.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Opens\Members_Checkout.xaml.cs">
+      <DependentUpon>Members_Checkout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Opens\Order_JC.xaml.cs">
+      <DependentUpon>Order_JC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Opens\Order_KT.xaml.cs">
+      <DependentUpon>Order_KT.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Opens\Order_Note.xaml.cs">
+      <DependentUpon>Order_Note.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PermissionUser.xaml.cs">
+      <DependentUpon>PermissionUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PermissionUsers\Permission.xaml.cs">
+      <DependentUpon>Permission.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PermissionUsers\PermissionModuleAddOrEdit.xaml.cs">
+      <DependentUpon>PermissionModuleAddOrEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PermissionUsers\PermissionUserAddOrEdit.xaml.cs">
+      <DependentUpon>PermissionUserAddOrEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Record.xaml.cs">
+      <DependentUpon>Record.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Staff.xaml.cs">
+      <DependentUpon>Staff.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Staffs\ImportStaffWindow.xaml.cs">
+      <DependentUpon>ImportStaffWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Staffs\PrintStaffWindow.xaml.cs">
+      <DependentUpon>PrintStaffWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Staffs\StaffAddOrEditWindow.xaml.cs">
+      <DependentUpon>StaffAddOrEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Staffs\StaffInformation.xaml.cs">
+      <DependentUpon>StaffInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\XpenseTracker.xaml.cs">
+      <DependentUpon>XpenseTracker.xaml</DependentUpon>
+    </Compile>
+    <Page Include="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Resources\Control\PagingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Control\PagingControlTwo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Control\UCTabItemWithClose.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Buttons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\DataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\GroupBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\PublicBasic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Account.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DiningTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DiningTables\DiningTable_XS_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DiningTables\Insert_DiningTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Information.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Informations\Information_HF.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Informations\Information_XQ.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Member.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Members\CancelMembershipWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Members\MemberAddOrEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Members\MemberCardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Members\UpdatePasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Members\VipAddOrEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Menus\MenuAddOrEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Menus\Menu_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Open.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Opens\DiningTable_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Opens\Dining_Options.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Opens\DMenu_UC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Opens\JiaZai.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Opens\Members_Checkout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Opens\Order_JC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Opens\Order_KT.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Opens\Order_Note.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PermissionUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PermissionUsers\Permission.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PermissionUsers\PermissionModuleAddOrEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PermissionUsers\PermissionUserAddOrEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Record.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Staff.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Staffs\ImportStaffWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Staffs\PrintStaffWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Staffs\StaffAddOrEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Staffs\StaffInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\XpenseTracker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EntityDeploy Include="Model\CYGLXTModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CYGLXTModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\CYGLXTModel.edmx.diagram">
+      <DependentUpon>CYGLXTModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\1.jpg" />
+    <Resource Include="Resources\Images\2.jpg" />
+    <Resource Include="Resources\Images\296306.jpg" />
+    <Resource Include="Resources\Images\jiazai.gif" />
+    <Resource Include="Resources\Images\NextPage\button_begin.png" />
+    <Resource Include="Resources\Images\NextPage\button_end.png" />
+    <Resource Include="Resources\Images\NextPage\button_ff.png" />
+    <Resource Include="Resources\Images\NextPage\button_rew.png" />
+    <Resource Include="Resources\Images\NextPage\button_rotate_ccw.png" />
+    <Resource Include="Resources\Images\png-0010.png" />
+    <Resource Include="Resources\Images\png-0022.png" />
+    <Resource Include="Resources\Images\timg.jpg" />
+    <Resource Include="Resources\Images\上一页.png" />
+    <Resource Include="Resources\Images\下一页.png" />
+    <Resource Include="Resources\Images\个人信息.png" />
+    <Resource Include="Resources\Images\今日办卡.png" />
+    <Resource Include="Resources\Images\今日开台.png" />
+    <Resource Include="Resources\Images\今日消费.png" />
+    <Resource Include="Resources\Images\仓库.png" />
+    <Resource Include="Resources\Images\会员.png" />
+    <Resource Include="Resources\Images\修改.png" />
+    <Resource Include="Resources\Images\修改密码.png" />
+    <Resource Include="Resources\Images\充值.png" />
+    <Resource Include="Resources\Images\充值金额.png" />
+    <Resource Include="Resources\Images\关闭.png" />
+    <Resource Include="Resources\Images\关闭1.png" />
+    <Resource Include="Resources\Images\减少.png" />
+    <Resource Include="Resources\Images\删除.png" />
+    <Resource Include="Resources\Images\加菜.png" />
+    <Resource Include="Resources\Images\加载层02.gif" />
+    <Resource Include="Resources\Images\取消.png" />
+    <Resource Include="Resources\Images\员工-01.png" />
+    <Resource Include="Resources\Images\员工.png" />
+    <Resource Include="Resources\Images\商标.png" />
+    <Resource Include="Resources\Images\回复.png" />
+    <Resource Include="Resources\Images\增加.png" />
+    <Resource Include="Resources\Images\客户人数.png" />
+    <Resource Include="Resources\Images\密码.png" />
+    <Resource Include="Resources\Images\已完成.png" />
+    <Resource Include="Resources\Images\待关台.png" />
+    <Resource Include="Resources\Images\打印.png" />
+    <Resource Include="Resources\Images\日历.png" />
+    <Resource Include="Resources\Images\最小化.png" />
+    <Resource Include="Resources\Images\末页.png" />
+    <Resource Include="Resources\Images\查找.png" />
+    <Resource Include="Resources\Images\消息.png" />
+    <Resource Include="Resources\Images\清空.png" />
+    <Resource Include="Resources\Images\点餐.png" />
+    <Resource Include="Resources\Images\用户.png" />
+    <Resource Include="Resources\Images\离职.png" />
+    <Resource Include="Resources\Images\菜单.png" />
+    <Resource Include="Resources\Images\营业收入.png" />
+    <Resource Include="Resources\Images\设置.png" />
+    <Resource Include="Resources\Images\账户管理.png" />
+    <Resource Include="Resources\Images\跳转.png" />
+    <Resource Include="Resources\Images\还原.png" />
+    <Resource Include="Resources\Images\退卡.png" />
+    <Resource Include="Resources\Images\退菜.png" />
+    <Resource Include="Resources\Images\选择图片.png" />
+    <Resource Include="Resources\Images\餐饮.png" />
+    <Resource Include="Resources\Images\首页.png" />
+    <Resource Include="Resources\Images\首页1.png" />
+    <Resource Include="Resources\Images\默认图片.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\CYGLXTModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CYGLXTModel.Context.cs</LastGenOutput>
+      <DependentUpon>CYGLXTModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model\CYGLXTModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CYGLXTModel.edmx</DependentUpon>
+      <LastGenOutput>CYGLXTModel.cs</LastGenOutput>
+    </Content>
+    <Resource Include="Resources\Images\提示.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

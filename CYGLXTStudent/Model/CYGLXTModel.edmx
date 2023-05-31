@@ -1,0 +1,874 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CYGLXTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="B_EatInRecord">
+          <Key>
+            <PropertyRef Name="eatInRecordID" />
+          </Key>
+          <Property Name="eatInRecordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number" Type="int" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="totalMoney" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="orderID" Type="int" />
+          <Property Name="startTime" Type="datetime" />
+          <Property Name="endTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="B_Order">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number" Type="int" />
+          <Property Name="orderTime" Type="datetime" />
+          <Property Name="money" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="remark" Type="varchar" MaxLength="200" />
+          <Property Name="amount" Type="int" />
+          <Property Name="cutOffTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="B_Orderdetails">
+          <Key>
+            <PropertyRef Name="orderDetailsID" />
+          </Key>
+          <Property Name="orderDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orderID" Type="int" />
+          <Property Name="menuID" Type="int" />
+          <Property Name="quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="B_OutboundList">
+          <Key>
+            <PropertyRef Name="outboundListID" />
+          </Key>
+          <Property Name="outboundListID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tInventoryID" Type="int" />
+          <Property Name="time" Type="datetime" />
+          <Property Name="amount" Type="int" />
+          <Property Name="staffID" Type="int" />
+        </EntityType>
+        <EntityType Name="B_TheCargoDetail">
+          <Key>
+            <PropertyRef Name="theCargoDetailID" />
+          </Key>
+          <Property Name="theCargoDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lOTNO" Type="varchar" MaxLength="50" />
+          <Property Name="staffID" Type="int" />
+          <Property Name="materialsAreID" Type="int" />
+          <Property Name="amount" Type="int" />
+          <Property Name="source" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="money" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="remark" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="B_VIPConsumptionDetails">
+          <Key>
+            <PropertyRef Name="VIPConsumptionDetailsID" />
+          </Key>
+          <Property Name="VIPConsumptionDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="consumptionTiming" Type="datetime" />
+          <Property Name="money" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="integral" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="VIPID" Type="int" />
+          <Property Name="consumptionReason" Type="varchar" MaxLength="100" />
+          <Property Name="consumptionType" Type="varchar" MaxLength="50" />
+          <Property Name="orderID" Type="int" />
+        </EntityType>
+        <EntityType Name="R_JurisdictionGroupModule">
+          <Key>
+            <PropertyRef Name="jurisdictionGroupModuleID" />
+          </Key>
+          <Property Name="jurisdictionGroupModuleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jurisdictionGroupID" Type="int" />
+          <Property Name="moduleID" Type="int" />
+        </EntityType>
+        <EntityType Name="R_JurisdictionGroupUser">
+          <Key>
+            <PropertyRef Name="jurisdictionGroupUserID" />
+          </Key>
+          <Property Name="jurisdictionGroupUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jurisdictionGroupID" Type="int" />
+          <Property Name="staffID" Type="int" />
+          <Property Name="designation" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="S_Account">
+          <Key>
+            <PropertyRef Name="accountID" />
+          </Key>
+          <Property Name="accountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TotalMoney" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Avail" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AccountFrozen" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="S_AmountOfDetail">
+          <Key>
+            <PropertyRef Name="amountOfDetailID" />
+          </Key>
+          <Property Name="amountOfDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="money" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="reason" Type="varchar" MaxLength="50" />
+          <Property Name="time" Type="datetime" />
+          <Property Name="remark" Type="varchar" MaxLength="200" />
+          <Property Name="capitalPosition" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="S_DiningTable">
+          <Key>
+            <PropertyRef Name="diningTableID" />
+          </Key>
+          <Property Name="diningTableID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tableNumber" Type="varchar" MaxLength="50" />
+          <Property Name="number" Type="int" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="affiliation" Type="varchar" MaxLength="50" />
+          <Property Name="totalMoney" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="orderID" Type="int" />
+        </EntityType>
+        <EntityType Name="S_FinancialSubsidiary">
+          <Key>
+            <PropertyRef Name="financialSubsidiaryID" />
+          </Key>
+          <Property Name="financialSubsidiaryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="financialCategory" Type="varchar" MaxLength="50" />
+          <Property Name="money" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="remark" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="S_Information">
+          <Key>
+            <PropertyRef Name="InformationID" />
+          </Key>
+          <Property Name="InformationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staffSendID" Type="int" />
+          <Property Name="staffReceiveID" Type="int" />
+          <Property Name="title" Type="varchar" MaxLength="50" />
+          <Property Name="postTime" Type="datetime" />
+          <Property Name="sendContent" Type="varchar(max)" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="staffIDview" Type="bit" />
+          <Property Name="staffIDNview" Type="bit" />
+        </EntityType>
+        <EntityType Name="S_JurisdictionGroup">
+          <Key>
+            <PropertyRef Name="jurisdictionGroupID" />
+          </Key>
+          <Property Name="jurisdictionGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jurisdictionGroupMC" Type="varchar" MaxLength="50" />
+          <Property Name="describe" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="S_JurisdictionModule">
+          <Key>
+            <PropertyRef Name="moduleID" />
+          </Key>
+          <Property Name="moduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="module" Type="varchar" MaxLength="50" />
+          <Property Name="moduleDescribe" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="S_MaterialsAre">
+          <Key>
+            <PropertyRef Name="materialsAreID" />
+          </Key>
+          <Property Name="materialsAreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="unit" Type="varchar" MaxLength="50" />
+          <Property Name="category" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="S_Member">
+          <Key>
+            <PropertyRef Name="memberID" />
+          </Key>
+          <Property Name="memberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+          <Property Name="diningDiscount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="freshDiscount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="remark" Type="varchar" MaxLength="200" />
+          <Property Name="amount" Type="int" />
+        </EntityType>
+        <EntityType Name="S_Menu">
+          <Key>
+            <PropertyRef Name="menuID" />
+          </Key>
+          <Property Name="menuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dishes" Type="varchar" MaxLength="50" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="picture" Type="varchar" MaxLength="200" />
+          <Property Name="cuisine" Type="varchar" MaxLength="100" />
+          <Property Name="effective" Type="bit" />
+        </EntityType>
+        <EntityType Name="S_Staff">
+          <Key>
+            <PropertyRef Name="staffID" />
+          </Key>
+          <Property Name="staffID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMPNO" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+          <Property Name="IDNumber" Type="varchar" MaxLength="50" />
+          <Property Name="sex" Type="varchar" MaxLength="50" />
+          <Property Name="position" Type="varchar" MaxLength="50" />
+          <Property Name="entryDate" Type="datetime" />
+          <Property Name="departureDate" Type="datetime" />
+          <Property Name="statust" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="100" />
+          <Property Name="picture" Type="image" />
+        </EntityType>
+        <EntityType Name="S_TheLoginDetails">
+          <Key>
+            <PropertyRef Name="theLoginDetailsID" />
+          </Key>
+          <Property Name="theLoginDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staffID" Type="int" />
+          <Property Name="logonTime" Type="datetime" />
+          <Property Name="offlineTime" Type="datetime" />
+          <Property Name="theLogin" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="S_TInventory">
+          <Key>
+            <PropertyRef Name="tInventoryID" />
+          </Key>
+          <Property Name="tInventoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="materialsAreID" Type="int" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="amount" Type="int" />
+        </EntityType>
+        <EntityType Name="S_VIP">
+          <Key>
+            <PropertyRef Name="VIPID" />
+          </Key>
+          <Property Name="VIPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="memberID" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="cardNo" Type="varchar" MaxLength="50" />
+          <Property Name="availableBalance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="Integral" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+          <Property Name="openingTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityContainer Name="CYGLXTModelStoreContainer">
+          <EntitySet Name="B_EatInRecord" EntityType="Self.B_EatInRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_Order" EntityType="Self.B_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_Orderdetails" EntityType="Self.B_Orderdetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_OutboundList" EntityType="Self.B_OutboundList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_TheCargoDetail" EntityType="Self.B_TheCargoDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="B_VIPConsumptionDetails" EntityType="Self.B_VIPConsumptionDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="R_JurisdictionGroupModule" EntityType="Self.R_JurisdictionGroupModule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="R_JurisdictionGroupUser" EntityType="Self.R_JurisdictionGroupUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_Account" EntityType="Self.S_Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_AmountOfDetail" EntityType="Self.S_AmountOfDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_DiningTable" EntityType="Self.S_DiningTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_FinancialSubsidiary" EntityType="Self.S_FinancialSubsidiary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_Information" EntityType="Self.S_Information" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_JurisdictionGroup" EntityType="Self.S_JurisdictionGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_JurisdictionModule" EntityType="Self.S_JurisdictionModule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_MaterialsAre" EntityType="Self.S_MaterialsAre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_Member" EntityType="Self.S_Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_Menu" EntityType="Self.S_Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_Staff" EntityType="Self.S_Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_TheLoginDetails" EntityType="Self.S_TheLoginDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_TInventory" EntityType="Self.S_TInventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_VIP" EntityType="Self.S_VIP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CYGLXTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="B_EatInRecord">
+          <Key>
+            <PropertyRef Name="eatInRecordID" />
+          </Key>
+          <Property Name="eatInRecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="number" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="totalMoney" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="orderID" Type="Int32" />
+          <Property Name="startTime" Type="DateTime" Precision="3" />
+          <Property Name="endTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="B_Order">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="number" Type="Int32" />
+          <Property Name="orderTime" Type="DateTime" Precision="3" />
+          <Property Name="money" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="cutOffTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="B_Orderdetails">
+          <Key>
+            <PropertyRef Name="orderDetailsID" />
+          </Key>
+          <Property Name="orderDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orderID" Type="Int32" />
+          <Property Name="menuID" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+        </EntityType>
+        <EntityType Name="B_OutboundList">
+          <Key>
+            <PropertyRef Name="outboundListID" />
+          </Key>
+          <Property Name="outboundListID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tInventoryID" Type="Int32" />
+          <Property Name="time" Type="DateTime" Precision="3" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="staffID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="B_TheCargoDetail">
+          <Key>
+            <PropertyRef Name="theCargoDetailID" />
+          </Key>
+          <Property Name="theCargoDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lOTNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="staffID" Type="Int32" />
+          <Property Name="materialsAreID" Type="Int32" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="source" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="money" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="B_VIPConsumptionDetails">
+          <Key>
+            <PropertyRef Name="VIPConsumptionDetailsID" />
+          </Key>
+          <Property Name="VIPConsumptionDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="consumptionTiming" Type="DateTime" Precision="3" />
+          <Property Name="money" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="integral" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="VIPID" Type="Int32" />
+          <Property Name="consumptionReason" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="consumptionType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="orderID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="R_JurisdictionGroupModule">
+          <Key>
+            <PropertyRef Name="jurisdictionGroupModuleID" />
+          </Key>
+          <Property Name="jurisdictionGroupModuleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jurisdictionGroupID" Type="Int32" />
+          <Property Name="moduleID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="R_JurisdictionGroupUser">
+          <Key>
+            <PropertyRef Name="jurisdictionGroupUserID" />
+          </Key>
+          <Property Name="jurisdictionGroupUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jurisdictionGroupID" Type="Int32" />
+          <Property Name="staffID" Type="Int32" />
+          <Property Name="designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="S_Account">
+          <Key>
+            <PropertyRef Name="accountID" />
+          </Key>
+          <Property Name="accountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TotalMoney" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Avail" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AccountFrozen" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="S_AmountOfDetail">
+          <Key>
+            <PropertyRef Name="amountOfDetailID" />
+          </Key>
+          <Property Name="amountOfDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="money" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="reason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="time" Type="DateTime" Precision="3" />
+          <Property Name="remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="capitalPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="S_DiningTable">
+          <Key>
+            <PropertyRef Name="diningTableID" />
+          </Key>
+          <Property Name="diningTableID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tableNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="number" Type="Int32" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="affiliation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="totalMoney" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="orderID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="S_FinancialSubsidiary">
+          <Key>
+            <PropertyRef Name="financialSubsidiaryID" />
+          </Key>
+          <Property Name="financialSubsidiaryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="financialCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="money" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="S_Information">
+          <Key>
+            <PropertyRef Name="InformationID" />
+          </Key>
+          <Property Name="InformationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="staffSendID" Type="Int32" />
+          <Property Name="staffReceiveID" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="postTime" Type="DateTime" Precision="3" />
+          <Property Name="sendContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="staffIDview" Type="Boolean" />
+          <Property Name="staffIDNview" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="S_JurisdictionGroup">
+          <Key>
+            <PropertyRef Name="jurisdictionGroupID" />
+          </Key>
+          <Property Name="jurisdictionGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jurisdictionGroupMC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="describe" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="S_JurisdictionModule">
+          <Key>
+            <PropertyRef Name="moduleID" />
+          </Key>
+          <Property Name="moduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="module" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="moduleDescribe" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="S_MaterialsAre">
+          <Key>
+            <PropertyRef Name="materialsAreID" />
+          </Key>
+          <Property Name="materialsAreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="S_Member">
+          <Key>
+            <PropertyRef Name="memberID" />
+          </Key>
+          <Property Name="memberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="diningDiscount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="freshDiscount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="S_Menu">
+          <Key>
+            <PropertyRef Name="menuID" />
+          </Key>
+          <Property Name="menuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dishes" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="picture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cuisine" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="effective" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="S_Staff">
+          <Key>
+            <PropertyRef Name="staffID" />
+          </Key>
+          <Property Name="staffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMPNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sex" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="entryDate" Type="DateTime" Precision="3" />
+          <Property Name="departureDate" Type="DateTime" Precision="3" />
+          <Property Name="statust" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="S_TheLoginDetails">
+          <Key>
+            <PropertyRef Name="theLoginDetailsID" />
+          </Key>
+          <Property Name="theLoginDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="staffID" Type="Int32" />
+          <Property Name="logonTime" Type="DateTime" Precision="3" />
+          <Property Name="offlineTime" Type="DateTime" Precision="3" />
+          <Property Name="theLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="S_TInventory">
+          <Key>
+            <PropertyRef Name="tInventoryID" />
+          </Key>
+          <Property Name="tInventoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="materialsAreID" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="amount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="S_VIP">
+          <Key>
+            <PropertyRef Name="VIPID" />
+          </Key>
+          <Property Name="VIPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="memberID" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cardNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="availableBalance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Integral" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="openingTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityContainer Name="CYGLXTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="B_EatInRecord" EntityType="Self.B_EatInRecord" />
+          <EntitySet Name="B_Order" EntityType="Self.B_Order" />
+          <EntitySet Name="B_Orderdetails" EntityType="Self.B_Orderdetails" />
+          <EntitySet Name="B_OutboundList" EntityType="Self.B_OutboundList" />
+          <EntitySet Name="B_TheCargoDetail" EntityType="Self.B_TheCargoDetail" />
+          <EntitySet Name="B_VIPConsumptionDetails" EntityType="Self.B_VIPConsumptionDetails" />
+          <EntitySet Name="R_JurisdictionGroupModule" EntityType="Self.R_JurisdictionGroupModule" />
+          <EntitySet Name="R_JurisdictionGroupUser" EntityType="Self.R_JurisdictionGroupUser" />
+          <EntitySet Name="S_Account" EntityType="Self.S_Account" />
+          <EntitySet Name="S_AmountOfDetail" EntityType="Self.S_AmountOfDetail" />
+          <EntitySet Name="S_DiningTable" EntityType="Self.S_DiningTable" />
+          <EntitySet Name="S_FinancialSubsidiary" EntityType="Self.S_FinancialSubsidiary" />
+          <EntitySet Name="S_Information" EntityType="Self.S_Information" />
+          <EntitySet Name="S_JurisdictionGroup" EntityType="Self.S_JurisdictionGroup" />
+          <EntitySet Name="S_JurisdictionModule" EntityType="Self.S_JurisdictionModule" />
+          <EntitySet Name="S_MaterialsAre" EntityType="Self.S_MaterialsAre" />
+          <EntitySet Name="S_Member" EntityType="Self.S_Member" />
+          <EntitySet Name="S_Menu" EntityType="Self.S_Menu" />
+          <EntitySet Name="S_Staff" EntityType="Self.S_Staff" />
+          <EntitySet Name="S_TheLoginDetails" EntityType="Self.S_TheLoginDetails" />
+          <EntitySet Name="S_TInventory" EntityType="Self.S_TInventory" />
+          <EntitySet Name="S_VIP" EntityType="Self.S_VIP" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CYGLXTModelStoreContainer" CdmEntityContainer="CYGLXTEntities">
+          <EntitySetMapping Name="B_EatInRecord">
+            <EntityTypeMapping TypeName="CYGLXTModel.B_EatInRecord">
+              <MappingFragment StoreEntitySet="B_EatInRecord">
+                <ScalarProperty Name="eatInRecordID" ColumnName="eatInRecordID" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="totalMoney" ColumnName="totalMoney" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_Order">
+            <EntityTypeMapping TypeName="CYGLXTModel.B_Order">
+              <MappingFragment StoreEntitySet="B_Order">
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="orderTime" ColumnName="orderTime" />
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="cutOffTime" ColumnName="cutOffTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_Orderdetails">
+            <EntityTypeMapping TypeName="CYGLXTModel.B_Orderdetails">
+              <MappingFragment StoreEntitySet="B_Orderdetails">
+                <ScalarProperty Name="orderDetailsID" ColumnName="orderDetailsID" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="menuID" ColumnName="menuID" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_OutboundList">
+            <EntityTypeMapping TypeName="CYGLXTModel.B_OutboundList">
+              <MappingFragment StoreEntitySet="B_OutboundList">
+                <ScalarProperty Name="outboundListID" ColumnName="outboundListID" />
+                <ScalarProperty Name="tInventoryID" ColumnName="tInventoryID" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="staffID" ColumnName="staffID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_TheCargoDetail">
+            <EntityTypeMapping TypeName="CYGLXTModel.B_TheCargoDetail">
+              <MappingFragment StoreEntitySet="B_TheCargoDetail">
+                <ScalarProperty Name="theCargoDetailID" ColumnName="theCargoDetailID" />
+                <ScalarProperty Name="lOTNO" ColumnName="lOTNO" />
+                <ScalarProperty Name="staffID" ColumnName="staffID" />
+                <ScalarProperty Name="materialsAreID" ColumnName="materialsAreID" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="B_VIPConsumptionDetails">
+            <EntityTypeMapping TypeName="CYGLXTModel.B_VIPConsumptionDetails">
+              <MappingFragment StoreEntitySet="B_VIPConsumptionDetails">
+                <ScalarProperty Name="VIPConsumptionDetailsID" ColumnName="VIPConsumptionDetailsID" />
+                <ScalarProperty Name="consumptionTiming" ColumnName="consumptionTiming" />
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="integral" ColumnName="integral" />
+                <ScalarProperty Name="VIPID" ColumnName="VIPID" />
+                <ScalarProperty Name="consumptionReason" ColumnName="consumptionReason" />
+                <ScalarProperty Name="consumptionType" ColumnName="consumptionType" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="R_JurisdictionGroupModule">
+            <EntityTypeMapping TypeName="CYGLXTModel.R_JurisdictionGroupModule">
+              <MappingFragment StoreEntitySet="R_JurisdictionGroupModule">
+                <ScalarProperty Name="jurisdictionGroupModuleID" ColumnName="jurisdictionGroupModuleID" />
+                <ScalarProperty Name="jurisdictionGroupID" ColumnName="jurisdictionGroupID" />
+                <ScalarProperty Name="moduleID" ColumnName="moduleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="R_JurisdictionGroupUser">
+            <EntityTypeMapping TypeName="CYGLXTModel.R_JurisdictionGroupUser">
+              <MappingFragment StoreEntitySet="R_JurisdictionGroupUser">
+                <ScalarProperty Name="jurisdictionGroupUserID" ColumnName="jurisdictionGroupUserID" />
+                <ScalarProperty Name="jurisdictionGroupID" ColumnName="jurisdictionGroupID" />
+                <ScalarProperty Name="staffID" ColumnName="staffID" />
+                <ScalarProperty Name="designation" ColumnName="designation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Account">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_Account">
+              <MappingFragment StoreEntitySet="S_Account">
+                <ScalarProperty Name="accountID" ColumnName="accountID" />
+                <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+                <ScalarProperty Name="Avail" ColumnName="Avail" />
+                <ScalarProperty Name="AccountFrozen" ColumnName="AccountFrozen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_AmountOfDetail">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_AmountOfDetail">
+              <MappingFragment StoreEntitySet="S_AmountOfDetail">
+                <ScalarProperty Name="amountOfDetailID" ColumnName="amountOfDetailID" />
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="capitalPosition" ColumnName="capitalPosition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_DiningTable">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_DiningTable">
+              <MappingFragment StoreEntitySet="S_DiningTable">
+                <ScalarProperty Name="diningTableID" ColumnName="diningTableID" />
+                <ScalarProperty Name="tableNumber" ColumnName="tableNumber" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="affiliation" ColumnName="affiliation" />
+                <ScalarProperty Name="totalMoney" ColumnName="totalMoney" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_FinancialSubsidiary">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_FinancialSubsidiary">
+              <MappingFragment StoreEntitySet="S_FinancialSubsidiary">
+                <ScalarProperty Name="financialSubsidiaryID" ColumnName="financialSubsidiaryID" />
+                <ScalarProperty Name="financialCategory" ColumnName="financialCategory" />
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Information">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_Information">
+              <MappingFragment StoreEntitySet="S_Information">
+                <ScalarProperty Name="InformationID" ColumnName="InformationID" />
+                <ScalarProperty Name="staffSendID" ColumnName="staffSendID" />
+                <ScalarProperty Name="staffReceiveID" ColumnName="staffReceiveID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="postTime" ColumnName="postTime" />
+                <ScalarProperty Name="sendContent" ColumnName="sendContent" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="staffIDview" ColumnName="staffIDview" />
+                <ScalarProperty Name="staffIDNview" ColumnName="staffIDNview" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_JurisdictionGroup">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_JurisdictionGroup">
+              <MappingFragment StoreEntitySet="S_JurisdictionGroup">
+                <ScalarProperty Name="jurisdictionGroupID" ColumnName="jurisdictionGroupID" />
+                <ScalarProperty Name="jurisdictionGroupMC" ColumnName="jurisdictionGroupMC" />
+                <ScalarProperty Name="describe" ColumnName="describe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_JurisdictionModule">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_JurisdictionModule">
+              <MappingFragment StoreEntitySet="S_JurisdictionModule">
+                <ScalarProperty Name="moduleID" ColumnName="moduleID" />
+                <ScalarProperty Name="module" ColumnName="module" />
+                <ScalarProperty Name="moduleDescribe" ColumnName="moduleDescribe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_MaterialsAre">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_MaterialsAre">
+              <MappingFragment StoreEntitySet="S_MaterialsAre">
+                <ScalarProperty Name="materialsAreID" ColumnName="materialsAreID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="category" ColumnName="category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Member">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_Member">
+              <MappingFragment StoreEntitySet="S_Member">
+                <ScalarProperty Name="memberID" ColumnName="memberID" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="diningDiscount" ColumnName="diningDiscount" />
+                <ScalarProperty Name="freshDiscount" ColumnName="freshDiscount" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Menu">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_Menu">
+              <MappingFragment StoreEntitySet="S_Menu">
+                <ScalarProperty Name="menuID" ColumnName="menuID" />
+                <ScalarProperty Name="dishes" ColumnName="dishes" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="cuisine" ColumnName="cuisine" />
+                <ScalarProperty Name="effective" ColumnName="effective" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Staff">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_Staff">
+              <MappingFragment StoreEntitySet="S_Staff">
+                <ScalarProperty Name="staffID" ColumnName="staffID" />
+                <ScalarProperty Name="EMPNO" ColumnName="EMPNO" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="entryDate" ColumnName="entryDate" />
+                <ScalarProperty Name="departureDate" ColumnName="departureDate" />
+                <ScalarProperty Name="statust" ColumnName="statust" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_TheLoginDetails">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_TheLoginDetails">
+              <MappingFragment StoreEntitySet="S_TheLoginDetails">
+                <ScalarProperty Name="theLoginDetailsID" ColumnName="theLoginDetailsID" />
+                <ScalarProperty Name="staffID" ColumnName="staffID" />
+                <ScalarProperty Name="logonTime" ColumnName="logonTime" />
+                <ScalarProperty Name="offlineTime" ColumnName="offlineTime" />
+                <ScalarProperty Name="theLogin" ColumnName="theLogin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_TInventory">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_TInventory">
+              <MappingFragment StoreEntitySet="S_TInventory">
+                <ScalarProperty Name="tInventoryID" ColumnName="tInventoryID" />
+                <ScalarProperty Name="materialsAreID" ColumnName="materialsAreID" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_VIP">
+            <EntityTypeMapping TypeName="CYGLXTModel.S_VIP">
+              <MappingFragment StoreEntitySet="S_VIP">
+                <ScalarProperty Name="VIPID" ColumnName="VIPID" />
+                <ScalarProperty Name="memberID" ColumnName="memberID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="cardNo" ColumnName="cardNo" />
+                <ScalarProperty Name="availableBalance" ColumnName="availableBalance" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="Integral" ColumnName="Integral" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="openingTime" ColumnName="openingTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CYGLXTModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

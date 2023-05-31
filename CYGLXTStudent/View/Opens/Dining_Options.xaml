@@ -1,0 +1,190 @@
+﻿<Window x:Class="CYGLXTStudent.Views.Opens.Dining_Options"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:CYGLXTStudent.Resources.PublicClass"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        Height="600" Width="800" 
+        Icon="/Resources/Images/加菜.png"
+        Name="wdDiningOptions" WindowStartupLocation="CenterScreen" AllowsTransparency="True"
+        ResizeMode="NoResize" WindowStyle="None">
+    <!--页面Loaded-->
+    <i:Interaction.Triggers>
+        <!--Loaded-->
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction  Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border BorderThickness="2" BorderBrush="SkyBlue"  CornerRadius="2,2,2,2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="49*"/>
+                <RowDefinition Height="751*"/>
+            </Grid.RowDefinitions>
+            <!--表头-->
+            <Grid Grid.Row="0" Background="#03B8E3">
+                <WrapPanel VerticalAlignment="Center">
+                    <Image Source="/Resources/Images/餐饮.png"  Height="20" Width="20" Margin="5,0,0,0"/>
+                    <TextBlock FontSize="14" Foreground="#fff" VerticalAlignment="Center" Margin="5,0,0,0">结账</TextBlock>
+                </WrapPanel>
+                <Grid  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
+                    <Image Source="/Resources/Images/关闭.png"  Height="20" Width="20">
+                        <Image.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=wdDiningOptions}" />
+                        </Image.InputBindings>
+                    </Image>
+                </Grid>
+            </Grid>
+            <!--中间数据显示-->
+            <Grid Grid.Row="1" Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="212*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="476*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="245*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="298*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="117*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="117*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="140*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Background="#ECEDF2" Grid.Column="1" Grid.RowSpan="3" Margin="0,10" />
+                        <Grid Background="#ECEDF2" Grid.ColumnSpan="3" Grid.Row="1" Margin="10,0" />
+                        <Grid>
+                            <!--MouseDown事件-->
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <i:InvokeCommandAction Command="{Binding MouseDownJCCommand}" CommandParameter="{Binding ElementName=wdDiningOptions}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="12*"/>
+                                <RowDefinition Height="68*"/>
+                                <RowDefinition Height="27*"/>
+                                <RowDefinition Height="16*"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="1" Source="/Resources\Images\加菜.png"/>
+                            <TextBlock Text="加、退菜" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Grid>
+                    <Grid Background="#ECEDF2" Grid.Row="1"/>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="16*"/>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="35*"/>
+                            <RowDefinition Height="34*"/>
+                            <RowDefinition Height="30*"/>
+                            <RowDefinition Height="28*"/>
+                            <RowDefinition Height="17*"/>
+                            <RowDefinition Height="38*"/>
+                            <RowDefinition Height="5*"/>
+                            <RowDefinition Height="38*"/>
+                            <RowDefinition Height="19*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1" Margin="10,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="108*"/>
+                                <ColumnDefinition Width="179*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="顾客人数:" VerticalAlignment="Center" FontSize="13"/>
+                            <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="13" Text="{Binding Amount}"/>
+                        </Grid>
+                        <Grid Grid.Row="2" Margin="10,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="108*"/>
+                                <ColumnDefinition Width="179*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="下单时间:" VerticalAlignment="Center" FontSize="13"/>
+                            <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="13" Text="{Binding OrderTime }"/>
+                        </Grid>
+
+                        <Grid Grid.Row="4" Margin="10,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="108*"/>
+                                <ColumnDefinition Width="179*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="总数:" VerticalAlignment="Center" FontSize="13"/>
+                            <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="13" Text="{Binding Quantity }"/>
+                        </Grid>
+                        <Grid Grid.Row="5" Margin="10,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="108*"/>
+                                <ColumnDefinition Width="179*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="账单金额:" VerticalAlignment="Center" FontSize="13"/>
+                            <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="13" Text="{Binding Money }"/>
+                        </Grid>
+                        <Grid Grid.Row="7">
+                            <Button Content="普通结账"  BorderThickness="0"  Foreground="White" Height="35" Grid.Row="2" Width="200" Grid.Column="1" Command="{Binding ButtonClickCommand}" CommandParameter="{Binding ElementName=wdDiningOptions}">
+                                <Button.Template >
+                                    <ControlTemplate TargetType="{x:Type Button}" >
+                                        <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="1">
+                                            <Border.Background>#1296db</Border.Background>
+                                            <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                        <Grid Grid.Row="9">
+                            <Button Content="会员结账"  BorderThickness="0"  Foreground="White" Height="35" Grid.Row="2"  Grid.Column="1" Width="200" Command="{Binding ButtonClickHYCommand}" CommandParameter="{Binding ElementName=wdDiningOptions}">
+                                <Button.Template >
+                                    <ControlTemplate TargetType="{x:Type Button}" >
+                                        <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="1">
+                                            <Border.Background>#1296db</Border.Background>
+                                            <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="1" Background="#ECEDF2"/>
+                <Grid Grid.Column="2" >
+                    <Grid Background="White">
+                        <!--订单明细信息表-->
+                        <DataGrid x:Name="dgOrderDetails" IsReadOnly="True" AutoGenerateColumns="False" Background="white"
+                  CanUserResizeColumns="False" CanUserResizeRows="False"  SelectionMode="Single" 
+                  CanUserReorderColumns="False" AlternationCount="2"   CanUserAddRows="False"   
+                  VerticalAlignment="Top" 
+                                  ItemsSource="{Binding OrderDetails}" controls:DataGridBehavior.RowNumbers="True">
+                            <DataGrid.Columns >
+                                <DataGridTemplateColumn Width="50"
+                                        Header="序号"
+                                        IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DataGridRow}}, Path=Header}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTextColumn Header="菜名" Binding="{Binding Dishes}" Width="2*" />
+                                <DataGridTextColumn Header="数量" Binding="{Binding Quantity}" Width="1*" />
+                                <DataGridTextColumn Header="单价" Binding="{Binding Price,StringFormat='{}{0:F2}'}" Width="1*" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
+

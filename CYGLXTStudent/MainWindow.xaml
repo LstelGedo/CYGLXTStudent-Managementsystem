@@ -1,0 +1,504 @@
+﻿<Window x:Class="CYGLXTStudent.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:CYGLXTStudent.Resources.PublicClass"  
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        Icon="/Resources/Images/加菜.png" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"  
+        Name="wdMain"
+        ResizeMode="CanMinimize"       
+        WindowChrome.WindowChrome="{DynamicResource WindowChromeKey}" 
+        Title="MainWindow" Height="768" Width="1366">
+    <!--1、页面加载事件-->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=tabMain}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--2、窗口资源-->
+    <Window.Resources>
+        <!--WindowStyle="None":去除窗体边框-->
+        <WindowChrome x:Key="WindowChromeKey">
+            <WindowChrome.ResizeBorderThickness>
+                <Thickness>0</Thickness>
+            </WindowChrome.ResizeBorderThickness>
+        </WindowChrome>
+        <!--ToggleButton样式-->
+        <Style x:Key="ExpanderToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Height" Value="35" />
+            <!--框内颜色-->
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="Gainsboro"/>
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="宋体" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Expander}, Path=ActualWidth}"></Setter>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Template">
+                <!--右边图标-->
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Canvas Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
+                    Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <Canvas x:Name="canvNormal" Visibility="Visible" 
+                     Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
+                     Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Canvas.Right="0">
+
+                                <Path Data="M 0 0 L 6 6  12 0 " Stroke="#1296db" StrokeThickness="2" Canvas.Right="5" Canvas.Top="15"/>
+                            </Canvas>
+                            <Canvas x:Name="canvChecked" Visibility="Hidden" 
+                     Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
+                     Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Canvas.Right="0">
+
+                                <Path Data="M 0 0 L 6 -6  12 0 " Stroke="#1296db" StrokeThickness="2" Canvas.Right="5" Canvas.Top="20"/>
+                            </Canvas>
+
+                            <ContentPresenter 
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                     Margin="{TemplateBinding Padding}" 
+                     RecognizesAccessKey="True"                       
+                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Canvas>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" Value="SlateGray" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Visibility" TargetName="canvChecked" Value="Visible" />
+                                <Setter Property="Visibility" TargetName="canvNormal" Value="Hidden" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--Expander样式-->
+        <Style x:Key="ExpanderStyle" TargetType="{x:Type Expander}">
+            <!--下拉框颜色-->
+            <Setter Property="Foreground" Value="#57C8F2"/>
+            <Setter Property="FontFamily" Value="宋体" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Expander}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="0" SnapsToDevicePixels="True"
+                            Width="{TemplateBinding Width}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <ToggleButton x:Name="HeaderSite"  Grid.Row="0"
+                          ContentTemplate="{TemplateBinding HeaderTemplate}" 
+                          ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                          Content="{TemplateBinding Header}"                                   
+                          IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"                                  
+                          Style="{DynamicResource ExpanderToggleButtonStyle}" />
+                                <ContentPresenter x:Name="ExpandSite" Grid.Row="1"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsExpanded" Value="True">
+                                <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--Border样式-->
+        <Style x:Key="CalendarButton" TargetType="Border">
+            <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
+            <Setter Property="VerticalAlignment" Value="Top" ></Setter>
+            <Setter Property="Background" Value="White" ></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"  Value="True">
+                    <Setter Property="BorderBrush" Value="Black" ></Setter>
+                    <Setter Property="BorderThickness" Value="0,0,0,1" ></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--TextBlock样式-->
+        <Style x:Key="TextBlock" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FFF"></Setter>
+            <Setter Property="Width" Value="135"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
+            <Setter Property="VerticalAlignment" Value="Center" ></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"  Value="True">
+                    <Setter Property="FontWeight" Value="Light"></Setter>
+                    <!--背景颜色-->
+                    <Setter Property="Background" Value="#57C8F2" ></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--Border：菜单明细样式-->
+        <Style x:Key="menuBorder" TargetType="Border">
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <!--明细背景渐变-->
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#6EC9E5" Offset="0"/>
+                        <GradientStop Color="#6EC9E5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <!--渐变画刷-->
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+    </Window.Resources>
+    <!--3、页面布局-->
+    <Border BorderBrush="#3fb0f9" BorderThickness="2">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="16*"/>
+            </Grid.RowDefinitions>
+            <!--1、标题-->
+            <Grid Background="#3fb0f9" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Height="auto" Grid.ColumnSpan="2">
+                    <StackPanel Height="30" Width="30" VerticalAlignment="Center" Margin="10,0,0,0">
+                        <StackPanel.Background>
+                            <ImageBrush ImageSource="/Resources\Images\餐饮.png"></ImageBrush>
+                        </StackPanel.Background>
+                    </StackPanel>
+                    <TextBlock FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left"
+                           Cursor="Pen" Grid.Row="1"  Foreground="white">
+                        <TextBlock.Text>餐 饮 管 理 系 统</TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center"  Orientation="Horizontal" Margin="15,0">
+                        <!--（1）首页-->
+                        <Image Source="/Resources/Images/首页1.png" Height="20" Width="20" ToolTip="首页" Margin="0,0,10,0">
+                            <!--鼠标按下事件-->
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown" >
+                                    <i:InvokeCommandAction Command="{Binding HomePageCommand}" CommandParameter="{Binding ElementName=tabMain}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
+                        <!--（2）消息提醒-->
+                        <Canvas Margin="0,0,10,0" Width="20">
+                            <Image Source="/Resources/Images/消息.png" x:Name="img_XX" Height="20" Width="20" ToolTip="消息提醒">
+                                <!--鼠标按下事件-->
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDown" >
+                                        <i:InvokeCommandAction Command="{Binding InformationCommand}" CommandParameter="{Binding ElementName=tabMain}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+                            <Border x:Name="dbNewsShow" Grid.Column="1" Height="16" Width="16" HorizontalAlignment="Right" VerticalAlignment="Top" Background="White" CornerRadius="8" Opacity="{Binding NewsShow}" Canvas.Left="16" Canvas.Top="-12">
+                                <TextBlock  Margin="0,0,0,1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding News}" Foreground="Red"/>
+                                <!--动画-->
+                                <Border.Triggers>
+                                    <EventTrigger RoutedEvent="Loaded">
+                                        <EventTrigger.Actions>
+                                            <BeginStoryboard>
+                                                <!--关键帧动画：数值，作用于Canvas.Top-->
+                                                <Storyboard>
+                                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="dbNewsShow" Storyboard.TargetProperty="(Canvas.Top)" Duration="0:0:0.5" RepeatBehavior="Forever">
+                                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0.1" Value="-10"/>
+                                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0.2" Value="-12"/>
+                                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0.4" Value="-10"/>
+                                                        <DiscreteDoubleKeyFrame KeyTime="0:0:0.5" Value="-12"/>
+                                                    </DoubleAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                </Border.Triggers>
+                            </Border>
+                        </Canvas>
+                        <!--（3）最小化-->
+                        <Image Source="/Resources/Images/最小化.png" Height="20" Width="20" Margin="0,0,10,0">
+                            <!--鼠标按下事件-->
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown" >
+                                    <i:InvokeCommandAction Command="{Binding MinimizedCommand}" CommandParameter="{Binding ElementName=wdMain}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
+                        <!--（4）最大化/还原-->
+                        <Image Source="/Resources/Images/还原.png" Height="20" Width="20"  Margin="0,0,10,0">
+                            <!--鼠标按下事件-->
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown" >
+                                    <i:InvokeCommandAction Command="{Binding MaximizedOrNormalCommand}" CommandParameter="{Binding ElementName=wdMain}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
+                        <!--（5）关闭-->
+                        <Image Source="/Resources/Images/关闭.png" Height="20" Width="20" Margin="0,0,10,0">
+                            <!--鼠标按下事件-->
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown" >
+                                    <i:InvokeCommandAction Command="{Binding CloseApplicationCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Image>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <!--2、菜单和内容-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="15*"/>
+                </Grid.ColumnDefinitions>
+                <!--左侧:菜单-->
+                <Grid Background="#FFDFE7F1" HorizontalAlignment="Stretch">
+                    <StackPanel x:Name="gridLeft" Orientation="Vertical" >
+                        <!--用户信息-->
+                        <Border Tag="-1"  Height="100"  BorderThickness="1" VerticalAlignment="Top">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <!--头像-->
+                                <Grid  Grid.Column="0">
+                                    <Ellipse Width="80" Height="80" ToolTip="点击图片，可查看个人详情！">
+                                        <!--鼠标按下图片-->
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseDown" >
+                                                <i:InvokeCommandAction Command="{Binding PersonalDetailsCommand}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                        <Ellipse.Fill>
+                                            <ImageBrush Stretch="Fill" ImageSource="{Binding ImgPicture,Mode=OneWay}"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </Grid>
+                                <!--内容-->
+                                <Grid Grid.Column="1">
+                                    <StackPanel VerticalAlignment="Center">
+                                        <WrapPanel Margin="0,5">
+                                            <TextBlock Text="工号:"  Grid.Row="1" Foreground="#1296db" FontSize="12" />
+                                            <TextBlock  Grid.Row="1" Foreground="#1296db" FontSize="12" Margin="5,0" Text="{Binding StaffEntity.EMPNO}"/>
+                                        </WrapPanel>
+                                        <WrapPanel Margin="0,5">
+                                            <TextBlock Text="姓名:"  Grid.Row="1" Foreground="#1296db" FontSize="12" />
+                                            <TextBlock Grid.Row="1" Foreground="#1296db" FontSize="12" Margin="5,0"  Text="{Binding StaffEntity.name}"/>
+                                        </WrapPanel>
+                                        <WrapPanel Margin="0,5">
+                                            <TextBlock Grid.Row="1"  Text="职务:" Foreground="#1296db" FontSize="12" />
+                                            <TextBlock  Grid.Row="1" Foreground="#1296db" FontSize="12" Margin="5,0"  Text="{Binding StaffEntity.position}"/>
+                                        </WrapPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <!--账户管理-->
+                        <controls:DMButton BorderThickness="0" Background="White" Height="40" Margin="0,1,0,0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding AccountPageCommand}" CommandParameter="{Binding ElementName=tabMain}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <WrapPanel>
+                                <Image Height="23" Width="23" Margin="0,0,10,0" Source="/Resources\Images\账户管理.png"/>
+                                <Label VerticalAlignment="Center" Content="账户管理" Foreground="Black" />
+                            </WrapPanel>
+                        </controls:DMButton>
+                        <!--开台-->
+                        <controls:DMButton BorderThickness="0" Background="White" Height="40" Margin="0,1,0,0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding OpenPageCommand}" CommandParameter="{Binding ElementName=tabMain}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <WrapPanel>
+                                <Image Height="23" Width="23" Margin="0,0,10,0" Source="/Resources\Images\点餐.png"/>
+                                <Label VerticalAlignment="Center" Content="   开台   " Foreground="Black" />
+                            </WrapPanel>
+                        </controls:DMButton>
+                        <!--菜单管理-->
+                        <controls:DMButton BorderThickness="0" Background="White" Height="40" Margin="0,1,0,0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding MenuPageCommand}" CommandParameter="{Binding ElementName=tabMain}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <WrapPanel>
+                                <Image Height="23" Width="23" Margin="0,0,10,0" Source="/Resources\Images\菜单.png"/>
+                                <Label VerticalAlignment="Center" Content="菜单管理" Foreground="Black" />
+                            </WrapPanel>
+                        </controls:DMButton>
+                        <!--餐桌管理-->
+                        <controls:DMButton BorderThickness="0" Background="White" Height="40" Margin="0,1,0,0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding DiningPageCommand}" CommandParameter="{Binding ElementName=tabMain}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <WrapPanel>
+                                <Image Height="23" Width="23" Margin="0,0,10,0" Source="/Resources\Images\今日开台.png"/>
+                                <Label VerticalAlignment="Center" Content="餐桌管理" Foreground="Black" />
+                            </WrapPanel>
+                        </controls:DMButton>
+                        <!--员工管理-->
+                        <Expander Cursor="Hand"  BorderBrush="#DFE5E5" Style="{DynamicResource ExpanderStyle}" Margin="-1,0">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Rectangle Height="30" Width="30" >
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="/Resources\Images\员工.png" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <TextBlock Text="员工管理" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="Black" Margin="34,0,0,0"/>
+                                </StackPanel>
+                            </Expander.Header>
+                            <!--GroupBox:有边框的box-->
+                            <StackPanel HorizontalAlignment="Center">
+                                <!--员工管理-->
+                                <TextBlock  x:Name="StaffManagement"  Style="{DynamicResource TextBlock}" TextAlignment="Center" Foreground="Black" Padding="0,8,0,8">
+                                    <Run Text="员工管理" >
+                                         <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseDown">
+                                                <i:InvokeCommandAction Command="{Binding StaffPageCommand}" CommandParameter="{Binding ElementName=tabMain}" />
+                                            </i:EventTrigger>
+                                         </i:Interaction.Triggers>       
+                                    </Run>
+                                </TextBlock>
+                                <!--登录记录-->
+                                <TextBlock  x:Name="Userloginrecord"  Style="{DynamicResource TextBlock}" TextAlignment="Center" Foreground="Black" Padding="0,8,0,8">
+                                    <Run Text="登录记录">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseDown">
+                                                <i:InvokeCommandAction Command="{Binding RecordPageCommand}" CommandParameter="{Binding ElementName=tabMain}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers> 
+                                    </Run>
+                                </TextBlock>
+                            </StackPanel>
+                        </Expander>
+                        <!--会员管理-->
+                        <Expander  Cursor="Hand"  BorderBrush="#DFE5E5" Style="{DynamicResource ExpanderStyle}"  Margin="-1,0">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Rectangle Height="30" Width="30" >
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="/Resources\Images\会员.png"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <TextBlock Text="会员管理" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="Black" Margin="33,0,0,0" />
+                                </StackPanel>
+                            </Expander.Header>
+                            <!--GroupBox:有边框的box-->
+                            <StackPanel HorizontalAlignment="Center" >
+                                <!--会员管理-->
+                                <TextBlock  x:Name="Member" Style="{DynamicResource TextBlock}" TextAlignment="Center" Foreground="Black" Padding="0,8,0,8">
+                                    <Run Text="会员管理">                                       
+                                         <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseDown">
+                                                <i:InvokeCommandAction Command="{Binding MemberPageCommand}" CommandParameter="{Binding ElementName=tabMain}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers> 
+                                    </Run>
+                                </TextBlock>
+                                <!--消费记录-->
+                                <TextBlock  x:Name="XpenseTracker" Style="{DynamicResource TextBlock}" TextAlignment="Center" Foreground="Black" Padding="0,8,0,8">
+                                    <Run Text="消费记录">
+                                         <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseDown">
+                                                <i:InvokeCommandAction Command="{Binding TrackerPageCommand}" CommandParameter="{Binding ElementName=tabMain}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers> 
+                                    </Run>
+                                </TextBlock>
+                            </StackPanel>
+                        </Expander>
+                        <!--系统权限-->
+                        <Expander  Cursor="Hand"  BorderBrush="#DFE5E5" Style="{DynamicResource ExpanderStyle}"  Margin="-1,0">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Rectangle Height="30" Width="30" >
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="/Resources/Images/用户.png"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <TextBlock Text="系统权限" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="Black" Margin="33,0,0,0" />
+                                </StackPanel>
+                            </Expander.Header>
+                            <!--GroupBox:有边框的box-->
+                            <StackPanel HorizontalAlignment="Center" >
+                                <!--权限管理-->
+                                <TextBlock  x:Name="Permission" Style="{DynamicResource TextBlock}" TextAlignment="Center" Foreground="Black" Padding="0,8,0,8">
+                                    <Run Text="权限管理">
+                                         <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseDown">
+                                                <i:InvokeCommandAction Command="{Binding PermissionCommand}" CommandParameter="{Binding ElementName=tabMain}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers> 
+                                    </Run>
+                                </TextBlock>
+                                <!--权限组用户-->
+                                <TextBlock  x:Name="PermissionUser" Style="{DynamicResource TextBlock}" TextAlignment="Center" Foreground="Black" Padding="0,8,0,8">
+                                    <Run Text="权限组用户">
+                                         <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseDown">
+                                                <i:InvokeCommandAction Command="{Binding PermissionUserCommand}" CommandParameter="{Binding ElementName=tabMain}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers> 
+                                    </Run>
+                                </TextBlock>
+
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                </Grid>
+                <!--右侧:选项卡-->
+                <Grid Grid.Column="1">
+                    <!--选项卡：用户控件嵌套-->
+                    <TabControl Name="tabMain" Background="#ECEDF2" BorderThickness="0" Tag="110" Margin="0,-2,0,0">
+                    </TabControl>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
